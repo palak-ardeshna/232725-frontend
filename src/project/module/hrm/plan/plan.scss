@@ -1,0 +1,131 @@
+@use '../../../../styles/variables.scss' as *;
+
+.plan-table {
+  .name-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    
+    .name {
+      font-weight: 500;
+    }
+  }
+  
+  .price-container {
+    display: flex;
+    align-items: center;
+    
+    .price {
+      font-weight: 600;
+      color: $text-primary;
+    }
+  }
+  
+  .duration-container {
+    .duration {
+      font-size: 14px;
+      color: $text-secondary;
+      font-weight: normal;
+    }
+  }
+  
+  .trial-days-container {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.plan-card {
+  background-color: $bg-light;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px $shadow-light;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 4px 12px $shadow-color;
+  }
+  
+  .plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    
+    .plan-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: $text-primary;
+      margin: 0;
+    }
+    
+    .plan-actions {
+      display: flex;
+      gap: 8px;
+    }
+  }
+  
+  .plan-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 8px;
+  }
+  
+  .duration {
+    font-size: 14px;
+    color: $text-secondary;
+    font-weight: normal;
+  }
+  
+  .plan-features {
+    margin-top: 16px;
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      
+      .feature-icon {
+        margin-right: 10px;
+        color: $text-success;
+      }
+      
+      .feature-text {
+        font-size: 14px;
+      }
+    }
+  }
+  
+  .plan-footer {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.plan-form {
+  .ant-form-item {
+    margin-bottom: 24px;
+  }
+  
+  .form-section {
+    margin-bottom: 32px;
+    
+    h3 {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      color: $text-primary;
+    }
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+} 

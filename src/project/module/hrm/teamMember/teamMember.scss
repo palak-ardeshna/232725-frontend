@@ -1,0 +1,245 @@
+@use '../../../../styles/variables.scss' as *;
+
+.team-name {
+    cursor: pointer;
+}
+
+.team-member-overview-page {
+    padding: 0;
+    background-color: var(--bg-primary);
+
+    .team-member-overview-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 24px;
+        border-bottom: 1px solid $border-color;
+
+        .header-left {
+            .team-heading {
+                font-size: 24px;
+                font-weight: 600;
+                color: $text-primary;
+                margin: 0;
+                display: flex;
+                align-items: center;
+
+                .title-icon {
+                    margin-right: 16px;
+                    color: $primary-color;
+                    font-size: 22px;
+                    display: flex;
+                    align-items: center;
+                    flex-shrink: 0;
+                }
+            }
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+    }
+
+    .team-member-overview {
+        padding: 20px;
+        background-color: var(--bg-primary);
+
+        .team-member-overview-loading,
+        .team-member-overview-error,
+        .team-member-overview-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            text-align: center;
+
+            p {
+                margin-top: 15px;
+                color: var(--text-secondary);
+            }
+        }
+    }
+}
+
+.team-member {
+    .team-name {
+        color: var(--text-primary);
+        cursor: pointer;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .member-count {
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-top: 4px;
+    }
+}
+
+.name-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .ant-avatar {
+        background-color: var(--primary-color);
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+
+    .name {
+        font-weight: 500;
+
+        &.error-text {
+            color: var(--text-error);
+        }
+    }
+
+    &.dropdown-item {
+        padding: 5px 0;
+
+        .role-badge {
+            .ant-badge-status-dot {
+                &.ant-badge-status-error {
+                    background-color: var(--text-error) !important;
+                }
+            }
+        }
+    }
+}
+
+// Role badge styling
+.role-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .role-text {
+        color: var(--primary-color); // Purple color for role text
+        font-weight: 500;
+    }
+
+    .ant-badge-status-dot {
+        background-color: var(--primary-color) !important;
+    }
+}
+
+// Project count badge styling
+.project-count-badge {
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    padding: 0 8px;
+    height: 22px;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    .anticon {
+        margin-right: 4px;
+    }
+
+    span {
+        font-size: 12px;
+        font-weight: 500;
+    }
+}
+
+// Member list styling in the team member table
+.member-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 4px;
+
+    .member-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2px 0;
+
+        .member-name {
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.85);
+        }
+
+        .role-badge-small {
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+            padding: 0 6px;
+            border-radius: 8px;
+            background-color: #f6f6f6;
+            height: 16px;
+
+            .ant-badge-status-dot {
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background-color: var(--primary-color);
+            }
+
+            .role-text-small {
+                margin-left: 4px;
+                font-size: 10px;
+                color: rgba(0, 0, 0, 0.65);
+            }
+        }
+    }
+
+    .more-members {
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.45);
+        margin-top: 2px;
+    }
+}
+
+.member-count {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.45);
+    margin-top: 4px;
+}
+
+// Dropdown styling
+.ant-select-dropdown {
+    .ant-select-item-option-content {
+        .name-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+    }
+}
+
+.team-leader {
+    display: flex;
+    align-items: center;
+
+    .leader-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 13px;
+
+        .leader-name {
+            font-weight: 500;
+        }
+
+        .leader-role {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+    }
+
+    .no-leader {
+        color: #999;
+        font-style: italic;
+        font-size: 13px;
+    }
+}

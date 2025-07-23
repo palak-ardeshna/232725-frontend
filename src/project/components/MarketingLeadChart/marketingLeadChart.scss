@@ -1,0 +1,137 @@
+@use '../../../styles/variables' as *;
+
+.marketing-lead-chart-container {
+    margin-bottom: 24px;
+    width: 100%;
+
+    .ant-card-head {
+        padding: 16px !important;
+        border-bottom: 1px solid var(--border-color) !important;
+
+        .ant-card-head-title {
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            color: var(--text-primary) !important;
+        }
+    }
+
+    .ant-card-body {
+        padding: 16px !important;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: visible !important;
+        border-radius: 0 0 8px 8px !important;
+    }
+}
+
+.marketing-lead-card {
+    border-radius: 8px;
+    box-shadow: 0 3px 10px var(--shadow-light);
+    background: var(--bg-card) !important;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color) !important;
+    height: 100%;
+}
+
+.chart-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 220px;
+}
+
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+
+.marketing-chart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 8px;
+}
+
+.source-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.total-count {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--primary-color, #0284c7);
+    line-height: 1;
+}
+
+.total-label {
+    font-size: 14px;
+    color: var(--text-secondary, #64748b);
+    margin-top: 4px;
+}
+
+.source-bars {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.source-bar-item {
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.source-bar-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.source-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary, #64748b);
+}
+
+.source-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary, #64748b);
+}
+
+.source-progress {
+    margin-bottom: 4px !important;
+
+    .ant-progress-bg {
+        height: 10px !important;
+        border-radius: 5px !important;
+    }
+
+    .ant-progress-outer {
+        margin-right: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+.source-percentage {
+    text-align: right;
+    font-size: 14px;
+    color: var(--text-secondary, #64748b);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .marketing-lead-chart-container {
+        width: 100%;
+    }
+}

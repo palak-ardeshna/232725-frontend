@@ -1,0 +1,91 @@
+@use '../../../../../../styles/variables' as *;
+
+.notes-tab {
+    .notes-card {
+        margin-bottom: 24px;
+
+        .ant-card-head {
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 24px;
+
+            .ant-card-head-title {
+                padding: 0;
+            }
+
+            .ant-card-extra {
+                padding: 0;
+            }
+        }
+
+        .ant-card-body {
+            padding: 24px;
+        }
+
+        .notes-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px;
+            text-align: center;
+
+            .ant-spin {
+                margin-bottom: 16px;
+            }
+        }
+
+        .notes-list {
+            .ant-list-item {
+                padding: 16px 0;
+
+                &:first-child {
+                    padding-top: 0;
+                }
+
+                .note-content {
+                    margin-top: 12px;
+                    white-space: pre-wrap;
+                }
+            }
+        }
+    }
+}
+
+.note-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+}
+
+.note-table {
+    .ant-badge-status-text {
+        color: var(--text-primary) !important;
+        font-weight: 500;
+    }
+
+    .ant-badge-status-dot {
+        background-color: var(--primary-color) !important;
+    }
+
+    .ant-tag {
+        font-weight: 500;
+    }
+}
+
+.client-notes-tab {
+    .notes-content {
+        padding: 0;
+
+        .table-list {
+            .title-container {
+                display: flex;
+                align-items: center;
+            }
+
+            .ant-table-tbody>tr>td {
+                padding: 12px 16px;
+            }
+        }
+    }
+} 

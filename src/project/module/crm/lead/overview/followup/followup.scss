@@ -1,0 +1,132 @@
+@use '../../../../../../styles/variables' as *;
+
+.followup-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+}
+
+.followup-table {
+    .ant-badge-status-text {
+        color: var(--text-primary) !important;
+        font-weight: 500;
+    }
+
+    .ant-badge-status-dot {
+        background-color: var(--primary-color) !important;
+    }
+
+    .ant-tag {
+        font-weight: 500;
+    }
+}
+
+.lead-followup-tab {
+    width: 100%;
+    height: 100%;
+
+    .followup {
+        height: 100%;
+
+        .module-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+
+
+            // Remove border radius from Select dropdown
+            .ant-select {
+                .ant-select-selector {
+                    border-radius: 0 !important;
+                }
+            }
+        }
+
+        .followup-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+
+            .table-list {
+                flex: 1;
+                overflow: auto;
+
+                .title-container {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .ant-table-tbody>tr>td {
+                    padding: 12px 16px;
+                }
+            }
+        }
+    }
+
+    // Modal styling
+    .ant-modal-content {
+        border-radius: 8px;
+
+        .ant-modal-header {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .ant-modal-body {
+            padding: 24px;
+        }
+    }
+
+    // Form styling
+    .followup-form {
+        .form-section {
+            margin-bottom: 24px;
+
+            .section-title {
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 16px;
+                color: #333;
+            }
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 24px;
+
+            .ant-btn {
+                margin-left: 12px;
+            }
+        }
+
+        // Style for call notes field
+        .call-notes-field {
+            margin-top: 15px;
+
+            .ant-form-item-label {
+                label {
+                    font-size: 15px !important;
+                    font-weight: 600 !important;
+                    color: #1890ff !important;
+                }
+            }
+
+            .ant-form-item-control-input-content {
+                textarea {
+                    border: 1px solid #d9d9d9;
+                    border-radius: 6px;
+                    padding: 12px;
+                    min-height: 120px;
+
+                    &:focus {
+                        border-color: #1890ff;
+                        box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+                    }
+                }
+            }
+        }
+    }
+}

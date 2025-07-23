@@ -1,0 +1,72 @@
+@use '../../../../../../../styles/variables' as *;
+
+.project-progress-card {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: $bg-primary !important;
+
+    .ant-card-body {
+        padding: 20px;
+    }
+
+    .progress-item {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .ant-progress {
+            margin-bottom: 4px;
+
+            .ant-progress-text {
+                color: $text-primary !important;
+            }
+
+            .ant-progress-inner {
+                background-color: $bg-secondary !important;
+            }
+
+            .ant-progress-text {
+                color: $text-primary !important;
+            }
+
+        }
+
+        .progress-icon-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+
+            svg {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .timeline-dates {
+        margin-top: 8px;
+
+        .ant-tag {
+            padding: 5px 10px;
+            font-size: 12px;
+
+            svg {
+                margin-right: 4px;
+            }
+        }
+    }
+
+    @media (max-width: 576px) {
+        .progress-item {
+            margin-bottom: 16px;
+        }
+    }
+}

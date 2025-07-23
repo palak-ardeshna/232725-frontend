@@ -1,0 +1,216 @@
+@use '../../../../../styles/variables' as *;
+@use "sass:map";
+
+
+.filter {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    box-shadow: 0 4px 20px $shadow-color;
+
+    @media (max-width: 1024px) {
+        border: none;
+        box-shadow: none;
+        background: transparent;
+    }
+
+    &-content {
+        flex: 1;
+        padding: 24px;
+        overflow: auto;
+
+        @media (max-width: 1024px) {
+            padding: 0;
+        }
+    }
+
+    &-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 24px;
+        padding: 4px;
+
+        @media (max-width: 1024px) {
+            padding: 0;
+            gap: 16px;
+        }
+    }
+
+    &-card {
+        background: $bg-primary;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        padding: 20px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: $gradient-primary;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        &:hover {
+            border-color: $primary-color;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba($primary-color, 0.1);
+
+            &::before {
+                opacity: 0.02;
+            }
+
+            .filter-card-title {
+                color: $primary-color;
+            }
+        }
+
+        &-header {
+            margin-bottom: 16px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        &-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: $primary-color;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+
+        &-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+        }
+
+        &-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: $bg-light;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: $gradient-row;
+            }
+
+            .stat-value {
+                font-size: 15px;
+                font-weight: 600;
+                color: $primary-color;
+            }
+
+            .stat-label {
+                font-size: 13px;
+                color: $text-secondary;
+            }
+        }
+
+        &-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid $border-color;
+
+            .btn-icon {
+                width: 32px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 6px;
+                color: $text-secondary;
+                transition: all 0.3s ease;
+                border: 1px solid $border-color;
+
+                &:hover {
+                    color: $primary-color;
+                    border-color: $primary-color;
+                    background: rgba($primary-color, 0.05);
+                }
+
+                &.delete:hover {
+                    color: $text-error;
+                    border-color: $text-error;
+                    background: rgba($text-error, 0.05);
+                }
+            }
+        }
+    }
+}
+
+
+
+// Filter name with count
+.filter-name {
+    .filter-count {
+        font-size: 12px;
+        color: $text-secondary;
+        margin-left: 4px;
+    }
+}
+
+
+.empty-filters-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background: $bg-dark;
+    border-radius: $border-radius;
+    border: 1px dashed $border-color;
+    margin-top: 20px;
+
+    .ant-typography {
+        color: $text-secondary;
+        font-size: 16px;
+    }
+}
+
+// Filter type tag styles
+.filter-type-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    min-width: 80px;
+    height: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    @each $type, $gradient in (tag: $gradient-tag,
+        status: $gradient-status,
+        label: $gradient-label,
+        source: $gradient-source,
+        category: $gradient-category,
+        general: $gradient-general ) {
+        &.#{$type} {
+            background: $gradient;
+            color: map.get(map.get($filter-type-colors, $type), 'text-light');
+
+            .dark-mode & {
+                background: $gradient;
+                color: map.get(map.get($filter-type-colors, $type), 'text-dark');
+            }
+        }
+    }
+}

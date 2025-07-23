@@ -1,0 +1,18 @@
+.btnn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  height: 38px;
+  min-width: 38px;
+  letter-spacing: 0.02em;
+  background: linear-gradient(to right, #1677ff, #4096ff);
+  color: #fff;
+
+}

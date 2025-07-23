@@ -1,0 +1,96 @@
+@use '../../../../../styles/variables.scss' as *;
+
+.team-member-overview-page {
+    .team-member-overview-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 24px;
+        border-bottom: 1px solid $border-color;
+
+
+
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+    }
+
+    .team-member-overview {
+        padding: 20px;
+        background-color: var(--bg-primary);
+
+        // .members-section {}
+
+        .team-member-overview-loading,
+        .team-member-overview-error,
+        .team-member-overview-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            text-align: center;
+
+            p {
+                margin-top: 15px;
+                color: var(--text-secondary);
+            }
+        }
+    }
+}
+
+.name-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .ant-avatar {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 500;
+    }
+
+
+}
+
+.member-table {
+    .ant-badge-status-text {
+        color: var(--text-primary) !important;
+        font-weight: 500;
+    }
+
+    .ant-badge-status-dot {
+        background-color: var(--primary-color) !important;
+    }
+
+    .btn-delete {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s ease-in-out;
+        border: 1px solid var(--text-error) !important;
+        border-radius: 4px;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--text-error) !important;
+        }
+
+        .anticon {
+            font-size: 16px;
+        }
+    }
+
+    .ant-table-tbody>tr>td {
+        vertical-align: middle;
+    }
+}
+
+.delete-modal {
+    .ant-modal-body {
+        padding: 24px;
+    }
+}

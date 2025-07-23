@@ -1,0 +1,127 @@
+@use '../../../../../../styles/variables' as *;
+
+.project-members-tab {
+    .members-content {
+        padding: 20px;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+    }
+
+    .team-header-card {
+        margin-bottom: 20px;
+        border-radius: $border-radius;
+        box-shadow: var(--card-shadow);
+
+        .team-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .team-info {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .team-icon {
+                    font-size: 20px;
+                    color: $primary-color;
+                }
+
+                .team-name {
+                    font-size: 18px;
+                    margin: 0;
+                }
+
+                .member-count {
+                    .ant-badge-count {
+                        background: $etc-gradient-success;
+                    }
+                }
+            }
+        }
+    }
+
+    .loading-container {
+        @include flex-center;
+        flex-direction: column;
+        padding: 40px;
+        gap: 16px;
+    }
+
+    .no-team-container,
+    .no-members-container {
+        @include flex-center;
+        flex-direction: column;
+        padding: 40px;
+        color: $text-secondary;
+        font-size: 16px;
+    }
+
+    .name-container {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .ant-avatar {
+            background: $gradient-primary;
+            color: $text-white;
+            font-weight: 500;
+        }
+
+        .name {
+            font-weight: 500;
+        }
+    }
+
+    .member-table {
+        .ant-badge-status-text {
+            color: var(--primary-color) !important;
+            font-weight: 500;
+        }
+
+        .ant-badge-status-dot {
+            background: var(--primary-color) !important;
+        }
+
+        .btn-delete {
+            background: none;
+            border: none;
+            color: $text-error;
+            cursor: pointer;
+            @include flex-center;
+
+            &:hover {
+                color: $text-error-hover;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .project-members-tab {
+        .header-actions {
+            .btn {
+                span {
+                    display: none;
+                }
+
+                .anticon,
+                svg {
+                    margin-right: 0;
+                    font-size: 18px;
+                }
+            }
+
+            .edit-members-btn {
+
+                .anticon,
+                svg {
+                    display: inline-flex !important;
+                }
+            }
+        }
+    }
+}

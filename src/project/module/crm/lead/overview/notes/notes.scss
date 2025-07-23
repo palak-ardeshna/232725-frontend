@@ -1,0 +1,87 @@
+@use '../../../../../../styles/variables' as *;
+
+.note-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+}
+
+.note-table {
+    .ant-badge-status-text {
+        color: var(--text-primary) !important;
+        font-weight: 500;
+    }
+
+    .ant-badge-status-dot {
+        background-color: var(--primary-color) !important;
+    }
+
+    .ant-tag {
+        font-weight: 500;
+    }
+
+    .title-container {
+        .title {
+            font-weight: 500;
+        }
+    }
+}
+
+.lead-notes-tab {
+    .notes-content {
+        padding: 0;
+
+        .table-list {
+            .title-container {
+                display: flex;
+                align-items: center;
+                max-width: 250px;
+                /* Adjust based on your design */
+
+                .title {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    width: 100%;
+                }
+            }
+
+            .content-container {
+                display: flex;
+                align-items: center;
+                max-width: 300px;
+                /* Adjust based on your design */
+
+                .content {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    width: 100%;
+                    color: var(--text-secondary);
+                    font-size: 0.9em;
+                }
+            }
+
+            .ant-table-tbody>tr>td {
+                padding: 12px 16px;
+            }
+        }
+    }
+
+    .note-form {
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+    }
+}
+
+// Style for note form modal
+.note-form-modal {
+    .ant-modal-body {
+        padding: 24px;
+    }
+}

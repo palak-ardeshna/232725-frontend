@@ -1,0 +1,99 @@
+@use '../../../../styles/_variables.scss' as *;
+
+
+// Pipeline stage info styles
+.pipeline-stage-info {
+    width: 100%;
+
+    .pipeline-name {
+        font-weight: 600;
+        color: var(--primary-color);
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+
+    .stage-name {
+        color: var(--text-secondary);
+        font-size: 13px;
+    }
+}
+
+// Value display styles
+.value-display {
+    display: flex;
+    align-items: baseline;
+
+    .currency-symbol {
+        font-size: 16px;
+        color: var(--text-primary);
+        margin-right: 2px;
+        font-weight: 600;
+    }
+
+    .value-amount {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+}
+
+.value-display-card {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 12px;
+
+    .currency-symbol {
+        font-size: 16px;
+        color: var(--primary-color);
+        margin-right: 3px;
+        font-weight: 600;
+    }
+
+    .value-amount {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+}
+
+.lead-form {
+    .ant-input-number-group-wrapper {
+        width: 100% !important;
+
+        .ant-input-number-group-addon {
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+            border-right: none !important;
+            padding: 0 12px !important;
+            font-weight: 500 !important;
+            border-top-left-radius: 8px !important;
+            border-bottom-left-radius: 8px !important;
+
+            &:hover,
+            &:focus,
+            &-focused {
+                border-color: var(--primary-color) !important;
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &-focused {
+            border-color: var(--primary-color) !important;
+        }
+
+        .ant-input-number {
+            width: 100% !important;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+
+            &:hover,
+            &:focus,
+            &-focused {
+                .ant-input-number-group-addon {
+                    border-color: var(--primary-color) !important;
+                }
+            }
+        }
+    }
+}

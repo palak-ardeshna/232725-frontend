@@ -1,0 +1,146 @@
+@use '../../../../../styles/variables' as *;
+
+
+.stage {
+    height: 100%;
+    background: transparent;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    box-shadow: 0 4px 20px $shadow-color;
+
+    @media (max-width: 1024px) {
+        border: none;
+        box-shadow: none;
+        background: transparent;
+    }
+}
+
+
+
+.type-label {
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: $text-primary;
+}
+
+.default-yes {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    color: $text-success;
+}
+
+.default-no {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    color: $text-secondary;
+}
+
+.pipeline-id,
+.pipeline-name {
+    font-size: 12px;
+    color: $text-primary;
+    padding: 2px 4px;
+    border-radius: 4px;
+    display: inline-block;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stage-card {
+    height: 100%;
+    background: $bg-primary;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: $gradient-primary;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+        border-color: $primary-color;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($primary-color, 0.1);
+
+        &::before {
+            opacity: 0.02;
+        }
+
+        .stage-card-title {
+            color: $primary-color;
+        }
+    }
+
+    &-header {
+        margin-bottom: 16px;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    &-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: $primary-color;
+        margin: 0;
+        transition: color 0.3s ease;
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        position: relative;
+    }
+
+    &-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        background: $bg-light;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: $gradient-row;
+        }
+
+        .stat-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: $primary-color;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: $text-secondary;
+        }
+    }
+
+    .type-label,
+    .default-yes,
+    .default-no,
+    .pipeline-name,
+    .pipeline-id {
+        width: auto;
+        text-align: right;
+        justify-content: flex-end;
+    }
+}

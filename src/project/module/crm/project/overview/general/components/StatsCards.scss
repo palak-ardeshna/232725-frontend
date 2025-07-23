@@ -1,0 +1,199 @@
+@use '../../../../../../../styles/variables' as *;
+
+// Stats Cards Styles
+.stats-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        background: $bg-primary !important;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+        min-height: 100px;
+
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .ant-card-body {
+            padding: 16px !important;
+            height: 100%;
+        }
+
+        .stat-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            height: 100%;
+
+            .stat-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                border-radius: 12px;
+                font-size: 24px;
+                background: $gradient-primary;
+                color: $text-white;
+                flex-shrink: 0;
+                padding: 0;
+                line-height: 1;
+
+                svg {
+                    width: 26px;
+                    height: 26px;
+                }
+            }
+
+            .stat-details {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 2px;
+
+                .stat-label {
+                    color: $text-secondary;
+                    font-size: 14px;
+                    font-weight: 600;
+                    letter-spacing: 0.2px;
+                    margin: 0;
+                    line-height: 1;
+                }
+
+                .stat-main {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 16px;
+
+                    .value-group {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+
+                        .stat-value {
+                            font-size: 24px;
+                            font-weight: 800;
+                            color: $text-primary;
+                            line-height: 1;
+                            margin-bottom: 4px;
+                        }
+
+                        .stat-completion {
+                            display: flex;
+                            align-items: center;
+                            gap: 4px;
+                            font-size: 12px;
+                            font-weight: 500;
+                            color: $text-secondary;
+                            line-height: 1;
+
+                            .status-icon {
+                                font-size: 12px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+
+                            &.completed {
+                                color: $text-success;
+
+                                .status-icon {
+                                    color: $text-success;
+                                    background: $etc-gradient-success;
+                                    background-clip: text;
+                                    -webkit-text-fill-color: transparent;
+                                }
+                            }
+
+                            &.pending {
+                                color: $text-warning;
+
+                                .status-icon {
+                                    color: $text-warning;
+                                    background: $etc-gradient-warning;
+                                    background-clip: text;
+                                    -webkit-text-fill-color: transparent;
+                                }
+                            }
+
+                            &.info {
+                                color: $text-info;
+
+                                .status-icon {
+                                    color: $text-info;
+                                    background: $etc-gradient-primary;
+                                    background-clip: text;
+                                    -webkit-text-fill-color: transparent;
+                                }
+                            }
+
+                            &.warning {
+                                color: $text-error;
+
+                                .status-icon {
+                                    color: $text-error;
+                                    background: $etc-gradient-error;
+                                    background-clip: text;
+                                    -webkit-text-fill-color: transparent;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .stat-progress {
+                margin-left: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .ant-progress {
+                    .ant-progress-text {
+                        color: $text-primary;
+                        font-size: 12px;
+                        font-weight: 600;
+                    }
+
+                    .ant-progress-circle-trail {
+                        stroke: rgba(0, 0, 0, 0.08);
+                    }
+
+                    .dark-mode & {
+                        .ant-progress-circle-trail {
+                            stroke: rgba(255, 255, 255, 0.1) !important;
+                        }
+                    }
+
+                    &.ant-progress-status-success {
+                        .ant-progress-text {
+                            color: $text-success;
+                        }
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    display: none;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,240 @@
+.project-general-tab {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+
+    .tables-section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 16px;
+        width: 100%;
+        overflow: hidden;
+
+        .table-section {
+            width: 100%;
+
+            .section-title {
+                color: var(--text-primary);
+                font-size: 16px;
+                font-weight: 600;
+                margin: 0 0 12px 0;
+            }
+
+            // Fix table width and scrolling
+            .ant-table-wrapper {
+                width: 100%;
+                overflow-x: auto;
+                background: var(--component-background);
+                border-radius: 4px;
+
+                .ant-table {
+                    min-width: unset !important;
+
+                    .ant-table-container {
+                        border: none;
+                    }
+
+                    .ant-table-thead>tr>th {
+                        background-color: var(--table-header-bg);
+                        color: var(--text-color);
+                        font-weight: 600;
+                        padding: 8px;
+                        white-space: nowrap;
+                    }
+
+                    .ant-table-tbody>tr {
+                        &:hover {
+                            td {
+                                background-color: var(--table-row-hover-bg);
+                            }
+                        }
+
+                        td {
+                            padding: 8px;
+                            white-space: nowrap;
+                        }
+                    }
+
+                    // Remove extra borders
+                    .ant-table-cell {
+                        border: none !important;
+                    }
+                }
+
+                // Hide scrollbar when not needed
+                &::-webkit-scrollbar {
+                    height: 6px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: var(--scrollbar-thumb);
+                    border-radius: 3px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background-color: var(--scrollbar-track);
+                }
+            }
+        }
+
+        // Span milestone table across full width
+        .milestone-section {
+            grid-column: span 2;
+        }
+
+        // Place task and cost tables side by side
+        .task-section,
+        .cost-section {
+            grid-column: span 1;
+        }
+
+        // Cost table specific styles
+        .cost-section {
+            .cost-name {
+                font-weight: 500;
+                color: var(--text-color);
+            }
+
+            .cost-amount {
+                font-family: monospace;
+                font-weight: 500;
+                color: var(--success-color);
+            }
+
+            .cost-date {
+                color: var(--text-color-secondary);
+            }
+
+            .ant-table-tbody>tr {
+                cursor: default;
+
+                &:hover {
+                    .cost-name {
+                        color: var(--primary-color);
+                    }
+                }
+            }
+        }
+
+        // Improve empty state
+        .ant-empty {
+            margin: 16px 0;
+            padding: 0;
+
+            .ant-empty-image {
+                height: 32px;
+                margin-bottom: 8px;
+            }
+
+            .ant-empty-description {
+                color: var(--text-color-secondary);
+                font-size: 12px;
+            }
+        }
+
+        // Fix table header alignment
+        .ant-table-column-sorters {
+            justify-content: flex-start;
+            padding: 0;
+        }
+    }
+
+    // Progress column styling
+    .progress-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+
+        .ant-progress {
+            line-height: 1;
+        }
+
+        .progress-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+    }
+
+    // Value amount styling
+    .value-amount {
+        font-family: var(--font-mono);
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+
+    // Status badge styling
+    .ant-badge {
+        .ant-badge-status-dot {
+            width: 8px;
+            height: 8px;
+        }
+
+        .ant-badge-status-text {
+            margin-left: 8px;
+            color: var(--text-primary);
+        }
+    }
+}
+
+.general-tab {
+    .dashboard-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 20px;
+
+        .grid-item {
+            background: var(--component-background);
+            border-radius: var(--border-radius-base);
+            padding: 20px;
+            box-shadow: var(--box-shadow-base);
+
+            &.full-width {
+                width: 100%;
+            }
+
+            &.half-width {
+                width: calc(50% - 10px);
+            }
+
+            .section-title {
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 16px;
+                color: var(--text-color);
+            }
+        }
+    }
+
+    .charts-section {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+        width: 100%;
+
+        .grid-item {
+            flex: 1;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+
+            .donut-chart-wrapper {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+    }
+
+    .table-list {
+        .ant-table-wrapper {
+            .ant-table {
+                background: transparent;
+            }
+        }
+    }
+}

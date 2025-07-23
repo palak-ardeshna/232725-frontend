@@ -1,0 +1,17 @@
+.project-priority-chart {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    height: 100%;
+
+    .chart-container {
+        padding: 10px;
+    }
+
+    .chart-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: var(--text-color);
+    }
+}

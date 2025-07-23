@@ -1,0 +1,102 @@
+@use '../../../../../../styles/variables' as *;
+
+// Client-specific responsive styling for GeneralDetailsTab
+.client-details.general-details {
+    // Adjust card grid layout for clients (which have only 3 cards instead of 4)
+    .fancy-cards-container {
+        // For larger screens, make better use of space with 3 cards
+        grid-template-columns: repeat(3, 1fr);
+        
+        @media (max-width: 1200px) {
+            // For medium screens, show 3 cards in a row still (since there are only 3)
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        @media (max-width: 992px) {
+            // For smaller screens, show 2 cards per row
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        @media (max-width: 768px) {
+            // For mobile screens, stack them
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+    }
+    
+    // Make cards more compact on smaller screens
+    @media (max-width: 768px) {
+        .fancy-card {
+            padding: 15px;
+            
+            .fancy-card-icon {
+                width: 40px;
+                height: 40px;
+                
+                svg {
+                    font-size: 20px;
+                }
+            }
+            
+            .fancy-card-content {
+                .fancy-card-value {
+                    font-size: 18px;
+                }
+            }
+        }
+        
+        // Adjust property items for better mobile display
+        .lead-properties-grid {
+            gap: 16px;
+        }
+        
+        .lead-property-item {
+            padding: 12px;
+            
+            .property-icon {
+                width: 35px;
+                height: 35px;
+                margin-right: 12px;
+                
+                svg {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    
+    // Even more compact for very small screens
+    @media (max-width: 576px) {
+        .section-title {
+            font-size: 16px;
+            
+            .section-icon {
+                font-size: 18px;
+            }
+        }
+        
+        .fancy-card {
+            padding: 12px;
+            
+            .fancy-card-icon {
+                width: 36px;
+                height: 36px;
+                margin-right: 12px;
+                
+                svg {
+                    font-size: 18px;
+                }
+            }
+            
+            .fancy-card-content {
+                .fancy-card-label {
+                    font-size: 10px;
+                }
+                
+                .fancy-card-value {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+} 

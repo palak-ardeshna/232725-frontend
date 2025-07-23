@@ -1,0 +1,533 @@
+@use '../../../../../styles/variables' as *;
+
+// Add custom styles for year selector
+.year-selector {
+    min-width: 80px !important;
+    width: 80px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+
+    .ant-select-selector {
+        border-radius: 6px !important;
+        height: 36px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    &.ant-select-focused .ant-select-selector {
+        box-shadow: none !important;
+        border-color: $primary-color !important;
+    }
+}
+
+.settings-view {
+    width: 100%;
+    animation: fadeIn 0.3s ease-in-out;
+
+    &-loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        width: 100%;
+    }
+
+    &-content {
+        width: 100%;
+        margin-top: 16px;
+    }
+
+    .settings-empty {
+        padding: 30px;
+        background: $bg-primary;
+        border-radius: $border-radius;
+        border: 1px dashed $border-color;
+    }
+
+    // Modern Stats Dashboard
+    .modern-stats-dashboard {
+        background: $bg-dark !important;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+        // Header with title and month selector
+        .stats-header {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: rgba($primary-color, 0.1);
+            border-bottom: 1px solid rgba($primary-color, 0.2);
+
+            .stats-icon {
+                font-size: 24px;
+                color: $primary-color;
+                margin-right: 12px;
+            }
+
+            .stats-title {
+                font-size: 18px;
+                font-weight: 700;
+                color: $text-primary;
+                flex: 1;
+            }
+
+            .month-selector {
+                .month-selector-wrapper {
+                    .ant-picker {
+                        background: rgba($primary-color, 0.15);
+                        border: 1px solid rgba($primary-color, 0.3);
+                        border-radius: 8px;
+                        padding: 4px 12px;
+
+                        input {
+                            color: $text-primary;
+                            font-weight: 600;
+                        }
+
+                        .anticon {
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Stats cards container
+        .stats-cards-container {
+            display: flex;
+            padding: 16px;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            // Individual stat card
+            .stat-card {
+                flex: 1;
+                min-width: 100px;
+                background: $gradient-secondary !important;
+                border: 1px solid $border-color !important;
+                border-radius: 10px;
+                padding: 16px;
+                text-align: center;
+                transition: all 0.2s ease;
+                position: relative;
+                overflow: hidden;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 4px;
+                    background: linear-gradient(90deg, rgba($primary-color, 0.7), rgba($primary-color, 0.3));
+                }
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                }
+
+                .stat-value {
+                    font-size: 28px;
+                    font-weight: 800;
+                    color: $text-primary;
+                    margin-bottom: 6px;
+                }
+
+                .stat-label {
+                    font-size: 13px;
+                    color: $text-secondary;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+
+                // Specific card styles
+                &.total-days:before {
+                    background: linear-gradient(90deg, #3498db, #2980b9);
+                }
+
+                &.full-days:before {
+                    background: linear-gradient(90deg, #2ecc71, #27ae60);
+                }
+
+                &.half-days:before {
+                    background: linear-gradient(90deg, #f39c12, #d35400);
+                }
+
+                &.hours:before {
+                    background: linear-gradient(90deg, #9b59b6, #8e44ad);
+                }
+
+                &.holidays:before {
+                    background: linear-gradient(90deg, #e74c3c, #c0392b);
+                }
+            }
+        }
+
+        // Time info container
+        .time-info-container {
+            display: flex;
+            padding: 0 16px 16px;
+            gap: 16px;
+
+            // Time card
+            .time-card {
+                flex: 1;
+                background: $bg-dark !important;
+                border: 1px solid $border-color !important;
+                border-radius: 10px;
+                padding: 16px;
+                position: relative;
+
+                .time-card-header {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 12px;
+
+                    .time-icon {
+                        color: $primary-color;
+                        font-size: 20px;
+                        margin-right: 8px;
+                    }
+
+                    span {
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: $text-primary;
+                    }
+                }
+
+                // Office hours specific
+                &.office-hours {
+                    .time-value {
+                        font-size: 22px;
+                        font-weight: 700;
+                        color: $text-primary;
+                        margin-bottom: 12px;
+                    }
+
+                    .time-thresholds {
+                        display: flex;
+                        gap: 12px;
+
+                        .threshold {
+                            display: flex;
+                            align-items: center;
+
+                            .threshold-dot {
+                                width: 8px;
+                                height: 8px;
+                                border-radius: 50%;
+                                margin-right: 8px;
+
+                                &.late-dot {
+                                    background-color: #e74c3c;
+                                }
+
+                                &.early-dot {
+                                    background-color: #3498db;
+                                }
+                            }
+
+                            .threshold-label {
+                                font-size: 13px;
+                                color: $text-secondary;
+                                margin-right: 8px;
+                            }
+
+                            .threshold-time {
+                                font-size: 14px;
+                                font-weight: 600;
+                                color: $text-primary;
+                            }
+                        }
+                    }
+                }
+
+                // Daily hours specific
+                &.daily-hours {
+                    .hours-container {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 12px;
+                        margin-top: 12px;
+
+                        .hour-block {
+                            text-align: center;
+                            padding: 8px 16px;
+                            border-radius: 8px;
+
+                            .hour-value {
+                                font-size: 24px;
+                                font-weight: 700;
+                                color: $text-primary;
+                            }
+
+                            .hour-label {
+                                font-size: 13px;
+                                color: $text-secondary;
+                                margin-top: 4px;
+                            }
+
+                            &.full-hour {
+                                background: rgba(46, 204, 113, 0.05);
+                                border: 1px solid rgba(46, 204, 113, 0.3);
+                            }
+
+                            &.half-hour {
+                                background: rgba(243, 156, 18, 0.05);
+                                border: 1px solid rgba(243, 156, 18, 0.3);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Card styling
+    .settings-card {
+        height: 100%;
+        border-radius: $border-radius;
+        background: $bg-primary !important;
+        border: 1px solid $border-color !important;
+        transition: all 0.3s ease;
+        box-shadow: 0 1px 3px rgba($shadow-color, 0.05);
+
+        &:hover {
+            box-shadow: 0 2px 8px rgba($shadow-color, 0.08);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: $text-primary;
+
+            svg {
+                font-size: 16px;
+                color: $primary-color;
+            }
+        }
+
+        .ant-card-head {
+            border-bottom: 1px solid $border-color;
+            padding: 0 16px;
+
+            .ant-card-head-title {
+                padding: 12px 0;
+            }
+        }
+
+        .ant-card-body {
+            padding: 16px !important;
+        }
+    }
+
+    // Calendar card styles
+    .calendar-card {
+        margin-bottom: 0;
+
+        .ant-card-body {
+            padding-top: 20px !important;
+        }
+
+        // Calendar container
+        .calendar-container {
+            margin-bottom: 0;
+
+            .calendar-header {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                margin-bottom: 15px;
+                flex-wrap: wrap;
+                gap: 10px;
+
+                .calendar-legend {
+                    display: flex;
+                    gap: 16px; // slightly bigger gap
+                    flex-wrap: wrap;
+
+                    .legend-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 7px;
+                        font-size: 16px; // bigger
+                        font-weight: 700; // bolder
+                        color: $text-secondary;
+
+                        .color-box {
+                            width: 14px;
+                            height: 14px;
+                            border-radius: 2px;
+
+                            &.working-day {
+                                background-color: $text-success;
+                            }
+
+                            &.half-day {
+                                background-color: $text-warning;
+                            }
+
+                            &.off-day {
+                                background-color: $text-error;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .calendar-grid {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 2px;
+
+                .calendar-day-header {
+                    padding: 12px 6px; // bigger
+                    text-align: center;
+                    font-weight: 800; // bolder
+                    font-size: 18px; // bigger
+                    color: $text-primary;
+                    background: $gradient-secondary;
+                    border-radius: $border-radius $border-radius 0 0;
+                    border: 1px solid $border-color;
+
+                    &.weekend {
+                        color: $text-secondary;
+                        background-color: rgba($text-error, 0.05);
+                    }
+                }
+
+                .calendar-day {
+                    height: 54px; // bigger
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    font-size: 22px; // bigger
+                    font-weight: 800; // bolder
+                    color: $text-primary;
+                    background-color: $bg-primary;
+                    border: 1px solid $border-color;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    flex-direction: column;
+
+                    .text-full-day {
+                        color: $text-success;
+                    }
+
+                    .text-half-day {
+                        color: $text-warning;
+                    }
+
+                    .text-off-day {
+                        color: $text-error;
+                    }
+
+                    .day-tooltip {
+                        position: absolute;
+                        bottom: 2px;
+                        font-size: 9px;
+                        font-weight: normal;
+                        opacity: 0.8;
+                        text-transform: capitalize;
+                        color: $text-primary;
+                    }
+
+                    &:hover {
+                        background-color: $bg-secondary;
+                        z-index: 1;
+                    }
+
+                    &.empty {
+                        background-color: rgba($text-secondary, 0.05);
+                        cursor: default;
+                    }
+
+                    &.sunday {
+                        color: $text-error;
+                        background-color: rgba($text-error, 0.05);
+                    }
+
+                    &.saturday {
+                        color: $text-warning;
+                        background-color: rgba($text-warning, 0.02);
+
+                        &.full-day {
+                            background-color: rgba($text-success, 0.1);
+                        }
+
+                        &.half-day {
+                            background-color: rgba($text-warning, 0.1);
+                        }
+
+                        &.off {
+                            background-color: rgba($text-error, 0.1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Mobile responsiveness
+@media (max-width: 992px) {
+    .settings-view {
+        .modern-stats-dashboard {
+            .stats-cards-container {
+                .stat-card {
+                    min-width: calc(50% - 8px);
+                    margin-bottom: 8px;
+                }
+            }
+
+            .time-info-container {
+                flex-direction: column;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-view {
+        .modern-stats-dashboard {
+            .stats-cards-container {
+                .stat-card {
+                    min-width: 100%;
+                }
+            }
+        }
+
+        .calendar-card {
+            .calendar-grid {
+                .calendar-day {
+                    height: 35px;
+                    font-size: 12px;
+                }
+
+                .calendar-day-header {
+                    font-size: 11px;
+                    padding: 6px 2px;
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

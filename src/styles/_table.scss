@@ -1,0 +1,256 @@
+@use './_variables.scss' as *;
+
+.table-list {
+    width: 100%;
+    overflow: hidden;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+
+    .ant-table {
+        background: transparent;
+
+        &-thead>tr>th {
+            background: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 15px;
+            font-weight: 600;
+
+            &.action-column {
+                position: sticky !important;
+                right: 0;
+                z-index: 1;
+                background: var(--bg-primary) !important;
+            }
+        }
+
+        &-tbody>tr {
+            &:hover {
+                td {
+                    background: var(--primary-light) !important;
+                }
+            }
+
+            >td {
+                border-bottom: 1px solid var(--border-color);
+                background: transparent;
+                padding: 10px 15px;
+                color: var(--text-primary);
+
+                &.action-column {
+                    position: sticky !important;
+                    right: 0;
+                    z-index: 1;
+                    background: var(--bg-primary) !important;
+                }
+            }
+
+            // Selected row styles
+            &.ant-table-row-selected {
+                >td {
+                    background: var(--primary-light) !important;
+
+                    &.action-column {
+                        background: var(--primary-light) !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .ant-pagination {
+        margin: 16px 0;
+        padding: 0 16px;
+    }
+
+    .action-btn {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+        border-radius: 0;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        &.view-btn {
+            color: var(--primary-color);
+
+            &:hover {
+                background: var(--primary-light);
+                border-color: var(--primary-color);
+            }
+        }
+
+        &.edit-btn {
+            color: var(--text-warning);
+
+            &:hover {
+                background: var(--text-warning-light);
+                border-color: var(--text-warning);
+            }
+        }
+
+        &.delete-btn {
+            color: var(--text-error);
+
+            &:hover {
+                background: var(--text-error-light);
+                border-color: var(--text-error);
+            }
+        }
+    }
+
+    .empty-state {
+        padding: 24px;
+    }
+}
+
+.bulk-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: $gradient-secondary;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.3s ease-in-out;
+    border-radius: 0;
+
+    .selected-count {
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+    .bulk-delete-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: $gradient-error;
+        color: var(--text-white) !important;
+        border: none;
+        background-color: transparent;
+        padding: 6px 14px;
+        border-radius: 0;
+        font-weight: 500;
+
+        &:hover {
+            background: $gradient-error !important;
+            color: var(--text-white) !important;
+        }
+    }
+}
+
+
+
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.name-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .name {
+        font-weight: 600;
+        color: var(--text-primary);
+        text-transform: capitalize;
+    }
+
+    .system-label {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--primary-color);
+        background-color: var(--primary-light);
+        padding: 2px 8px;
+        border-radius: 0;
+    }
+}
+
+
+.common-table {
+    width: 100%;
+
+    .table-scroll-container {
+        width: 100%;
+        overflow-x: auto;
+
+        &::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: var(--bg-secondary) !important;
+            border-radius: 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--border-color) !important;
+            border-radius: 0;
+
+            &:hover {
+                background: var(--bg-secondary) !important;
+            }
+        }
+    }
+
+    .ant-table-wrapper {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .ant-pagination {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+
+            &-options {
+                margin-top: 8px;
+            }
+
+            &-total-text {
+                width: 100%;
+                text-align: center;
+                margin: 0 !important;
+            }
+        }
+    }
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+// Mobile styles
+@media screen and (max-width: 768px) {
+    .table-list {
+        .ant-table {
+
+            &-thead>tr>th.action-column,
+            &-tbody>tr>td.action-column {
+                position: sticky !important;
+                right: 0;
+            }
+        }
+    }
+}

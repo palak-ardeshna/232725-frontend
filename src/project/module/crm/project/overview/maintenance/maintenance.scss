@@ -1,0 +1,110 @@
+@use '../../../../../../styles/variables.scss' as *;
+
+.maintenance-tab {
+    .value-amount {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+}
+
+// Style for FREE label in the table
+.free-maintenance-label {
+    display: inline-block;
+    padding: 3px 8px;
+    color: var(--text-success);
+    font-weight: bold;
+    border-radius: 4px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+}
+
+.maintenance-form {
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 0;
+
+        .form-col {
+            flex: 1;
+            min-width: 200px;
+        }
+    }
+
+    .ant-input-number-group-wrapper {
+        width: 100% !important;
+
+        .ant-input-number-group-addon {
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+            border-right: none !important;
+            padding: 0 12px !important;
+            font-weight: 500 !important;
+            border-top-left-radius: 8px !important;
+            border-bottom-left-radius: 8px !important;
+
+            &:hover,
+            &:focus,
+            &-focused {
+                border-color: var(--primary-color) !important;
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &-focused {
+            border-color: var(--primary-color) !important;
+        }
+
+        .ant-input-number {
+            width: 100% !important;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+
+            &:hover,
+            &:focus,
+            &-focused {
+                .ant-input-number-group-addon {
+                    border-color: var(--primary-color) !important;
+                }
+            }
+        }
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 24px;
+    }
+}
+
+
+// Add styles for the free tag
+.free-tag {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+
+    &.ant-tag-success {
+        background-color: rgba(82, 196, 26, 0.15);
+        border-color: rgba(82, 196, 26, 0.3);
+        color: var(--text-success);
+    }
+}
+
+// Style for the cost display in the view modal
+.cost-display {
+    display: flex;
+    align-items: center;
+
+    .free-tag {
+        margin-right: 8px;
+    }
+}

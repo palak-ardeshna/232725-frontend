@@ -1,0 +1,27 @@
+.department {
+    .table-list {
+        margin-top: 20px;
+    }
+
+    .name-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .name {
+            font-weight: 500;
+        }
+    }
+}
+
+.department-table {
+    .ant-table-tbody>tr>td {
+        vertical-align: middle;
+    }
+}
+
+.delete-modal {
+    .ant-modal-body {
+        padding: 24px;
+    }
+}

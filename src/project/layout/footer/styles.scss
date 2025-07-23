@@ -1,0 +1,109 @@
+@use '../../../styles/variables' as *;
+
+.dashboard-footer {
+  text-align: center;
+  background: $gradient-secondary;
+  padding: 16px 24px;
+  width: 100%;
+  border-top: 1px solid $border-color;
+
+  &-content {
+    @include flex-between;
+  }
+
+  &-copyright {
+    color: var(--text-secondary);
+  }
+
+  &-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    .ant-typography {
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: var(--primary-color) !important;
+      }
+    }
+  }
+
+  &-social {
+    display: flex;
+    gap: 12px;
+
+    .ant-typography {
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: var(--primary-color) !important;
+      }
+
+      .anticon {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+// Responsive styles for footer
+@media screen and (max-width: 1024px) {
+  .dashboard-footer {
+    &-content {
+      gap: 10px;
+    }
+
+    &-links {
+      gap: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-footer {
+    &-content {
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    &-copyright {
+      font-size: 12px;
+    }
+
+    &-links {
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .ant-typography {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dashboard-footer {
+    padding: 10px;
+
+    &-links {
+      gap: 12px;
+
+      .ant-typography {
+        font-size: 11px;
+      }
+    }
+
+    &-social {
+      gap: 10px;
+
+      .ant-typography .anticon {
+        font-size: 14px;
+      }
+    }
+  }
+}

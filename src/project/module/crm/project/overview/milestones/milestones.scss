@@ -1,0 +1,271 @@
+@use '../../../../../../styles/variables.scss' as *;
+
+.milestones-tab {
+    .milestones {
+        .milestones-content {
+            padding: 0;
+        }
+
+        .ant-table-wrapper {
+            .ant-table-thead>tr>th {
+                background-color: var(--bg-secondary);
+                color: var(--text-primary);
+                font-weight: 600;
+            }
+
+            .ant-table-tbody>tr>td {
+                vertical-align: middle;
+            }
+
+            .milestone-title-text {
+                font-weight: 500;
+            }
+
+            .value-display {
+                display: flex;
+                align-items: baseline;
+                flex-direction: row;
+                white-space: nowrap;
+
+                .value-amount {
+                    font-weight: 500;
+                    display: inline-block;
+                }
+            }
+
+            .value-display-column {
+                display: flex;
+                flex-direction: column;
+
+                .value-amount {
+                    font-weight: 500;
+                }
+
+                span {
+                    color: var(--text-primary) !important;
+                }
+            }
+
+            .value-amount {
+                font-size: 16px;
+                font-weight: 600;
+                color: var(--text-primary) !important;
+            }
+        }
+    }
+
+    .milestone-form,
+    .payment-request-form,
+    .reschedule-form {
+        .ant-form-item {
+            margin-bottom: 16px;
+        }
+    }
+
+    .payment-info,
+    .reschedule-info {
+        background-color: var(--bg-secondary);
+        padding: 16px;
+        border-radius: 8px;
+        margin-bottom: 24px;
+
+        p {
+            margin-bottom: 8px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.info-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &.horizontal {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            flex: 0 0 150px;
+        }
+
+        .value {
+            text-align: right;
+            flex: 1;
+        }
+    }
+
+    .label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+
+    .value-amount {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-primary) !important;
+    }
+}
+
+.reason-section {
+    margin-top: 5px;
+    padding: 10px;
+    border-top: 1px solid var(--border-color);
+
+    .reason-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        margin-bottom: 5px;
+    }
+
+    .reason-text {
+        font-style: italic;
+        color: var(--text-primary);
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}
+
+.milestone-tabs {
+    width: 100%;
+
+    .ant-tabs-content-holder {
+        padding: 16px 0;
+    }
+}
+
+.milestone-tasks-container {
+    padding: 0;
+
+    .tasks-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+    }
+
+    .task-table {
+        .ant-table-row {
+            cursor: pointer;
+        }
+    }
+}
+
+.selected-row {
+    background-color: var(--bg-secondary);
+
+    &:hover>td {
+        background-color: var(--bg-secondary) !important;
+    }
+}
+
+.milestone-task-form {
+    .ant-form-item-label {
+        font-weight: 500;
+    }
+}
+
+.task-form-modal {
+    .ant-modal-header {
+        border-bottom: 1px solid var(--border-color);
+    }
+}
+
+.empty-state {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.milestone-form {
+    .ant-input-number-group-wrapper {
+        width: 100% !important;
+
+        .ant-input-number-group-addon {
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+            padding: 0 12px !important;
+            font-weight: 500 !important;
+
+            &:hover,
+            &:focus,
+            &-focused {
+                border-color: var(--primary-color) !important;
+            }
+
+            &:first-child {
+                border-right: none !important;
+                border-top-left-radius: 8px !important;
+                border-bottom-left-radius: 8px !important;
+            }
+
+            &:last-child {
+                border-left: none !important;
+                border-top-right-radius: 8px !important;
+                border-bottom-right-radius: 8px !important;
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &-focused {
+            border-color: var(--primary-color) !important;
+        }
+
+        .ant-input-number {
+            width: 100% !important;
+
+            &:first-child {
+                border-top-right-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+            }
+
+            &:last-child {
+                border-top-left-radius: 0 !important;
+                border-bottom-left-radius: 0 !important;
+            }
+
+            &:hover,
+            &:focus,
+            &-focused {
+                .ant-input-number-group-addon {
+                    border-color: var(--primary-color) !important;
+                }
+            }
+        }
+    }
+}
+
+.info-row {
+    .value {
+        color: var(--text-primary) !important;
+    }
+}
+
+
+.ant-typography {
+    color: var(--text-primary) !important;
+}

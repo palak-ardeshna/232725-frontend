@@ -1,0 +1,342 @@
+@use '../../../styles/_variables.scss' as *;
+@use '../../../styles/_common.scss' as *;
+
+.role-table {
+    .name-container {
+        display: flex;
+        align-items: center;
+        max-width: 250px; /* Adjust based on your design */
+        
+        .name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+    }
+    
+}
+
+.permissions-section {
+    margin-top: 20px;
+
+    .permissions-card {
+        box-shadow: none;
+        border: 1px solid $border-color;
+        border-radius: 0;
+        overflow: hidden;
+    }
+
+    .permission-tabs {
+        .ant-tabs-nav {
+            margin-bottom: 0;
+            background-color: $bg-primary;
+            border-bottom: 1px solid $border-color;
+
+            &.ant-tabs-nav:before {
+                border-bottom: none !important;
+            }
+
+            .ant-tabs-tab {
+                padding: 8px 12px;
+                transition: $transition-default;
+                border: none;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                position: relative;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    top: 20%;
+                    height: 60%;
+                    width: 1px;
+                    background: linear-gradient(to bottom, transparent, $primary-color, transparent);
+                    opacity: 0.6;
+                }
+
+                &:last-child::after {
+                    display: none;
+                }
+
+                &:hover {
+                    color: $primary-color;
+                }
+
+                &.ant-tabs-tab-active {
+                    border: none !important;
+                    background: $bg-primary;
+                    border-radius: $border-radius;
+
+                    &::after {
+                        opacity: 0.6;
+                    }
+
+                    .ant-tabs-tab-btn {
+                        color: $primary-color;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+
+        .ant-tabs-content {
+            padding: 0;
+        }
+    }
+
+    .permission-table {
+        overflow: visible;
+        width: 100%;
+
+        .permission-header {
+            background: $bg-primary !important;
+            font-weight: 500;
+            border-bottom: 1px solid $border-color;
+        }
+
+        .dark-mode & {
+            .permission-header {
+                background: rgba(0, 0, 0, 0.2) !important;
+            }
+        }
+
+        .header-row,
+        .module-row {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid $border-color;
+            width: 100%;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        .module-col,
+        .permission-col,
+        .permission-header-col {
+            padding: 8px 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+        }
+
+        .module-col {
+            justify-content: flex-start;
+            border-right: 1px solid $border-color;
+
+            .module-name {
+                padding-left: 8px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                color: $text-primary;
+            }
+        }
+
+        .permission-col {
+            .ant-checkbox-wrapper {
+                margin-left: 0;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .ant-checkbox {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .permission-header-col {
+            font-weight: 500;
+            color: $text-secondary;
+        }
+    }
+
+    .ant-card-body {
+        padding: 0;
+    }
+
+    .ant-tabs-content {
+        padding: 12px;
+        background-color: $bg-primary;
+        border-top: none !important;
+    }
+
+    .ant-row {
+        flex-wrap: nowrap;
+        width: 100%;
+        min-width: max-content;
+    }
+}
+
+.permission-details-container {
+    width: 100%;
+    margin-top: 10px;
+
+    .permission-tabs {
+        .ant-tabs-nav {
+            margin-bottom: 16px;
+        }
+
+        .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+            color: $primary-color;
+        }
+
+        .ant-tabs-ink-bar {
+            background-color: $primary-color;
+        }
+    }
+
+    .permission-allowed-icon {
+        color: $text-success;
+        font-size: 16px;
+    }
+
+    .permission-denied-icon {
+        color: $text-error;
+        font-size: 16px;
+    }
+
+    .permission-table {
+        background-color: transparent;
+        overflow: hidden;
+
+        .ant-table {
+            background-color: transparent;
+            border: none;
+
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
+                width: 100%;
+            }
+        }
+
+        .ant-table-container {
+            border: none;
+            border-left: none;
+            border-right: none;
+            background-color: transparent;
+        }
+
+        .ant-table-thead {
+            border-bottom: 1px solid $border-color;
+
+            >tr {
+                >th {
+                    background-color: transparent !important;
+                    font-weight: 600;
+                    text-align: center;
+                    border-right: 1px solid $border-color !important;
+                    border-bottom: 1px solid $border-color !important;
+                    padding: 5px 4px;
+                    color: $text-secondary;
+
+                    &:first-child {
+                        padding-left: 8px;
+                    }
+
+                    &:last-child {
+                        border-right: none !important;
+                    }
+
+                    &::before {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+
+        .ant-table-tbody {
+            >tr {
+                >td {
+                    padding: 5px 4px;
+                    border-right: 1px solid $border-color !important;
+                    border-bottom: 1px solid $border-color !important;
+                    background-color: transparent !important;
+
+                    &:first-child {
+                        padding-left: 8px;
+                    }
+
+                    &:last-child {
+                        border-right: none !important;
+                    }
+                }
+
+                &:last-child>td {
+                    border-bottom: none !important;
+                }
+
+                &:hover>td {
+                    background-color: rgba(0, 0, 0, 0.02) !important;
+                }
+            }
+        }
+
+        .ant-table-cell {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .ant-table-thead>tr.ant-table-row-hover:not(.ant-table-expanded-row)>td,
+        .ant-table-tbody>tr.ant-table-row-hover:not(.ant-table-expanded-row)>td,
+        .ant-table-thead>tr:hover:not(.ant-table-expanded-row)>td,
+        .ant-table-tbody>tr:hover:not(.ant-table-expanded-row)>td {
+            background-color: rgba(0, 0, 0, 0.02) !important;
+        }
+
+        .ant-table-expanded-row>td {
+            border-bottom: none !important;
+        }
+
+        border: 1px solid $border-color;
+        border-radius: 4px;
+    }
+}
+
+.dark-mode {
+    .permission-details-container {
+        .permission-table {
+            .ant-table-thead>tr>th {
+                background-color: transparent !important;
+            }
+
+            .ant-table-tbody>tr>td {
+                background-color: transparent !important;
+            }
+
+            .ant-table-tbody>tr:hover>td {
+                background-color: rgba(255, 255, 255, 0.02) !important;
+            }
+        }
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+.modern-view {
+    .detail-item.full-width {
+        flex: 0 0 100%;
+        max-width: 100%;
+
+        .detail-content {
+            width: 100%;
+        }
+    }
+}
+
+.permission-count {
+    margin-left: 4px;
+    font-size: 12px;
+    color: $primary-color;
+    font-weight: 600;
+}

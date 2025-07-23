@@ -1,0 +1,137 @@
+$primary-color: var(--primary-color);
+$primary-color-rgb: var(--primary-color-rgb);
+$primary-light: var(--primary-light);
+$primary-hover: var(--primary-hover);
+
+$shadow-color: var(--shadow-color);
+$shadow-light: var(--shadow-light);
+
+
+$bg-primary: var(--bg-primary);
+$bg-secondary: var(--bg-secondary);
+$bg-light: var(--bg-light);
+$bg-dark: var(--bg-dark);
+
+
+$text-white: var(--text-white);
+$text-black: var(--text-black);
+$text-primary: var(--text-primary);
+$text-secondary: var(--text-secondary);
+$text-light: var(--text-light);
+$text-blue: var(--text-blue);
+$text-blue-dark: var(--text-blue-dark);
+$text-error: var(--text-error);
+$text-error-hover: var(--text-error-hover);
+$text-success: var(--text-success);
+$text-warning: var(--text-warning);
+$text-info: var(--text-info);
+
+$text-gradient-primary: var(--text-gradient-primary);
+$text-gradient-secondary: var(--text-gradient-secondary);
+$text-gradient-error: var(--text-gradient-error);
+
+$border-color: var(--border-color);
+$border-light: var(--border-light);
+$border-input-light: rgba(0, 0, 0, 0.2);
+$border-input-dark: rgba(255, 255, 255, 0.25);
+$shadow-color: var(--shadow-color);
+
+$header-height: 64px;
+$sidebar-width: 256px;
+$sidebar-collapsed-width: 80px;
+$border-radius: 8px;
+
+
+$transition-default: all 0.2s ease;
+
+
+$gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+$gradient-primary-hover: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
+$gradient-secondary: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+$gradient-row: linear-gradient(45deg, var(--primary-light) 0%, transparent 100%);
+$gradient-error: linear-gradient(135deg, var(--text-error), var(--text-error-hover));
+$gradient-blue: linear-gradient(90deg, #19a7ce 0%, #146C94 100%);
+
+
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin hover-effect {
+    transition: $transition-default;
+
+    &:hover {
+        background: $primary-light;
+        color: $primary-color;
+    }
+}
+
+$filter-type-colors: (
+    'tag': (light: #2db7f5,
+        dark: #4fc3f7,
+        bg-light: rgba(45, 183, 245, 0.1),
+        bg-dark: rgba(79, 195, 247, 0.1),
+        text-light: #ffffff,
+        text-dark: #ffffff),
+    'status': (light: #87d068,
+        dark: #9ccc65,
+        bg-light: rgba(135, 208, 104, 0.1),
+        bg-dark: rgba(156, 204, 101, 0.1),
+        text-light: #ffffff,
+        text-dark: #ffffff),
+    'label': (light: #108ee9,
+        dark: #42a5f5,
+        bg-light: rgba(16, 142, 233, 0.1),
+        bg-dark: rgba(66, 165, 245, 0.1),
+        text-light: #ffffff,
+        text-dark: #ffffff),
+    'source': (light: #f50,
+        dark: #ff7043,
+        bg-light: rgba(255, 85, 0, 0.1),
+        bg-dark: rgba(255, 112, 67, 0.1),
+        text-light: #ffffff,
+        text-dark: #ffffff),
+    'category': (light: #722ed1,
+        dark: #9575cd,
+        bg-light: rgba(114, 46, 209, 0.1),
+        bg-dark: rgba(149, 117, 205, 0.1),
+        text-light: #ffffff,
+        text-dark: #ffffff),
+    'general': (light: #1890ff,
+        dark: #64b5f6,
+        bg-light: rgba(24, 144, 255, 0.1),
+        bg-dark: rgba(100, 181, 246, 0.1),
+        text-light: #ffffff,
+        text-dark: #ffffff)
+);
+
+$gradient-tag: linear-gradient(135deg, #2db7f5, #0e9ad9);
+$gradient-status: linear-gradient(135deg, #87d068, #5eb539);
+$gradient-label: linear-gradient(135deg, #108ee9, #0b6cb0);
+$gradient-source: linear-gradient(135deg, #f50, #d94600);
+$gradient-category: linear-gradient(135deg, #722ed1, #5b23a6);
+$gradient-general: linear-gradient(135deg, #1890ff, #0e6bc7);
+
+
+$etc-gradient-success: linear-gradient(135deg, #52c41a, #38a169);
+$etc-gradient-warning: linear-gradient(135deg, #faad14, #d48806);
+$etc-gradient-error: linear-gradient(135deg, #f5222d, #c51d1d);
+$etc-gradient-primary: linear-gradient(135deg, #1890ff, #0e6bc7);
+$etc-gradient-primary-hover: linear-gradient(135deg, #0e6bc7, #1890ff);
+$etc-gradient-primary-light: linear-gradient(135deg, #e6f7ff, #bae7ff);
+$etc-gradient-primary-dark: linear-gradient(135deg, #0958d9, #00369f);
+
+$etc-gradient-1: linear-gradient(90deg, #22c55e, #16a34a);
+$etc-gradient-2: linear-gradient(90deg, #64748b, #475569);
+$etc-gradient-3: linear-gradient(90deg, #ef4444, #dc2626);
+$etc-gradient-4: linear-gradient(90deg, #f97316, #ea580c);
+$etc-gradient-5: linear-gradient(90deg, #3b82f6, #2563eb);

@@ -1,0 +1,259 @@
+@use '../../../../../styles/variables' as *;
+
+.settings-form-wrapper {
+    .settings-form {
+        .section-header {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: $text-primary;
+
+            .anticon {
+                margin-right: 8px;
+                color: $primary-color;
+            }
+        }
+
+        // Saturday Policy
+        .saturday-policy-container {
+            margin-bottom: 24px;
+
+            .section-description {
+                margin-bottom: 16px;
+                color: $text-secondary;
+            }
+
+            .saturday-policy {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                max-width: 450px;
+
+                .saturday-row {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 16px;
+                    justify-content: space-between;
+                    width: 100%;
+
+                    .saturday-label {
+                        min-width: 180px;
+                        margin-right: 16px;
+                        font-weight: 500;
+                        color: $text-primary;
+                        display: flex;
+                        align-items: center;
+
+                        .saturday-date {
+                            margin-left: 5px;
+                            font-weight: normal;
+                            font-size: 12px;
+                            color: $text-secondary;
+                            white-space: nowrap;
+                        }
+                    }
+
+                    .ant-form-item {
+                        margin-bottom: 0;
+                        flex: 1;
+
+                        .ant-select {
+                            width: 100% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Month field with reset button
+        .month-field {
+            display: flex;
+            align-items: center;
+
+            .ant-picker {
+                flex: 1;
+            }
+
+            .reset-month-btn {
+                margin-left: 8px;
+                color: $primary-color;
+
+                .anticon {
+                    margin-right: 4px;
+                }
+            }
+        }
+
+        // Calculated values
+        .calculated-values {
+            background-color: $bg-secondary;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0 24px;
+            border: 1px solid $border-color;
+
+            .dark-mode & {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+
+            .calculated-values-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 16px;
+
+                .ant-typography {
+                    color: $text-primary;
+                    font-weight: 500;
+                }
+            }
+
+            .calculated-values-grid {
+                .calculated-values-item {
+                    margin-bottom: 8px;
+
+                    .calculated-values-item-label {
+                        color: $text-secondary;
+                        font-size: 14px;
+                    }
+
+                    .calculated-values-item-value {
+                        color: $text-primary;
+                        font-size: 16px;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+
+        // Form items
+        .ant-form-item {
+            margin-bottom: 16px;
+
+            .ant-form-item-label>label {
+                color: $text-primary;
+
+                &::before {
+                    color: $text-error !important;
+                }
+            }
+        }
+
+        // Time picker
+        .ant-picker {
+            background-color: $bg-secondary;
+            border-color: $border-color;
+
+            input {
+                color: $text-primary;
+            }
+
+            .ant-picker-suffix {
+                color: $text-secondary;
+            }
+        }
+
+        // Input number
+        .ant-input-number {
+            background-color: $bg-secondary;
+            border-color: $border-color;
+
+            input {
+                color: $text-primary;
+            }
+
+            .ant-input-number-handler-wrap {
+                background-color: $bg-secondary;
+
+                .ant-input-number-handler {
+                    border-color: $border-color;
+
+                    .ant-input-number-handler-up-inner,
+                    .ant-input-number-handler-down-inner {
+                        color: $text-secondary;
+                    }
+                }
+            }
+        }
+
+        // Select
+        .ant-select {
+            .ant-select-selector {
+                background-color: $bg-secondary !important;
+                border-color: $border-color !important;
+            }
+
+            .ant-select-selection-item {
+                color: $text-primary;
+            }
+
+            .ant-select-arrow {
+                color: $text-secondary;
+            }
+        }
+    }
+}
+
+// Dropdown styles
+.saturday-dropdown {
+    background: $bg-dark !important;
+
+    .ant-select-item {
+        color: $text-primary;
+
+        &:hover {
+            background-color: $bg-light;
+        }
+
+        &.ant-select-item-option-selected {
+            background-color: $primary-light;
+            color: $primary-color;
+        }
+    }
+}
+
+// Styles for the Saturday policy dropdown
+.select-label-with-dot,
+.select-option-with-dot {
+    display: flex;
+    align-items: center;
+
+    .dot {
+        min-width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 8px;
+        display: inline-block;
+
+        &.half-day-dot {
+            background-color: #fa8c16; // Orange for half day
+        }
+
+        &.full-day-dot {
+            background-color: #52c41a; // Green for full day
+        }
+
+        &.off-day-dot {
+            background-color: #f5222d; // Red for off day
+        }
+    }
+}
+
+// Make sure the dots are visible in the dropdown
+.saturday-dropdown {
+    .ant-select-item-option-content {
+        .select-option-with-dot {
+            display: flex;
+            align-items: center;
+
+            .dot {
+                min-width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                margin-right: 8px;
+            }
+        }
+    }
+}

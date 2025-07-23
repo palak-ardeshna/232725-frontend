@@ -1,0 +1,306 @@
+@use '../../../styles/variables' as *;
+
+.project-completion-chart-container {
+    margin-bottom: 24px;
+    height: 100%;
+
+    .project-completion-chart-card {
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        background-color: var(--bg-card) !important;
+        color: var(--text-primary);
+        border: 1px solid var(--border-color) !important;
+        height: 100%;
+
+        .ant-card-head {
+            padding: 16px !important;
+            border-bottom: 1px solid var(--border-color) !important;
+            background: var(--bg-card);
+
+            .ant-card-head-title {
+                padding: 0 !important;
+                font-size: 20px !important;
+                font-weight: 700 !important;
+                color: var(--text-primary) !important;
+            }
+
+            .ant-card-extra {
+                .ant-segmented {
+                    background-color: var(--bg-secondary);
+                    border-radius: 4px;
+                    overflow: hidden;
+
+                    .ant-segmented-item {
+                        color: var(--text-secondary);
+                        transition: all 0.3s ease;
+
+                        .ant-segmented-item-icon {
+                            color: inherit;
+                        }
+
+                        &:hover {
+                            color: var(--primary-color);
+                        }
+
+                        &.ant-segmented-item-selected {
+                            background-color: var(--primary-color);
+                            color: #fff;
+
+                            &:hover {
+                                background-color: var(--primary-color);
+                                opacity: 0.85;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .ant-card-body {
+            padding: 16px !important;
+            height: calc(100% - 57px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        .chart-center-display {
+            text-align: center;
+            margin-bottom: 12px;
+            position: relative;
+
+            .chart-count {
+                font-size: 44px;
+                font-weight: 700;
+                color: var(--primary-color);
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+
+                .chart-percentage {
+                    font-size: 18px;
+                    margin-left: 8px;
+                    color: var(--success-color);
+                    font-weight: 600;
+                    align-self: flex-end;
+                    margin-bottom: 8px;
+                }
+            }
+
+            .chart-label {
+                font-size: 18px;
+                color: var(--text-secondary);
+
+                .chart-total {
+                    font-size: 14px;
+                    color: var(--text-light);
+                    margin-left: 5px;
+                    display: inline-block;
+                }
+            }
+        }
+
+        .chart-content {
+            flex: 1;
+            margin-bottom: 16px;
+            padding: 0;
+
+            .recharts-wrapper {
+                margin: 0 auto;
+
+                .recharts-surface {
+                    overflow: visible;
+                }
+
+                .recharts-default-tooltip {
+                    opacity: 0 !important;
+                    visibility: hidden !important;
+                }
+            }
+
+            .recharts-cartesian-grid-horizontal line,
+            .recharts-cartesian-grid-vertical line {
+                stroke: var(--border-color);
+            }
+
+            .recharts-cartesian-grid-bg {
+                fill: transparent;
+            }
+
+            .recharts-legend-item-text {
+                color: var(--text-secondary) !important;
+            }
+
+            .recharts-layer.recharts-cartesian-axis-line {
+                stroke: var(--border-color);
+                stroke-width: 1;
+            }
+
+            .recharts-text.recharts-label {
+                fill: var(--text-secondary);
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            .recharts-cartesian-axis-tick-line {
+                stroke: var(--border-color);
+            }
+
+            .recharts-cartesian-axis-tick-value {
+                fill: var(--text-secondary);
+                font-size: 14px;
+            }
+
+            .recharts-reference-line line {
+                stroke: var(--border-color);
+                stroke-dasharray: 3 3;
+            }
+
+            .recharts-bar-rectangle {
+                filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+
+                &:hover {
+                    opacity: 0.85;
+                }
+            }
+
+            .recharts-tooltip-cursor {
+                fill-opacity: 0.1;
+                fill: var(--primary-color);
+            }
+
+            .recharts-active-dot {
+                filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.35));
+            }
+        }
+
+        .chart-footer {
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+
+            .chart-legend {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+
+                .legend-item {
+                    display: flex;
+                    align-items: center;
+                    margin-right: 16px;
+                    margin-bottom: 4px;
+
+                    .legend-color {
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        margin-right: 8px;
+                        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+                    }
+
+                    span {
+                        font-size: 14px;
+                        color: var(--text-secondary);
+                    }
+
+                    .legend-value {
+                        margin-left: 8px;
+                        font-weight: 700;
+                        color: var(--color-5);
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.custom-chart-tooltip {
+    background-color: rgba(18, 24, 40, 0.85) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    min-width: 170px;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+
+    .tooltip-label {
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #ffffff;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 6px;
+        text-align: center;
+    }
+
+    .tooltip-data {
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: var(--text-warning);
+        display: flex;
+        justify-content: space-between;
+
+        &.early {
+            color: var(--color-3);
+            font-weight: 500;
+        }
+
+        &.ontime {
+            color: var(--success-color);
+        }
+
+        &.delayed {
+            color: var(--text-error);
+        }
+
+        &.planned {
+            color: var(--text-info);
+        }
+
+        &.total {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 5px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.2);
+            padding-top: 5px;
+        }
+
+        &:first-of-type {
+            color: var(--color-3);
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.base-chart-card {
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.recharts-default-tooltip {
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color) !important;
+}
+
+// Fix for background transparency
+.recharts-wrapper,
+.recharts-cartesian-grid-bg,
+.recharts-pie,
+.recharts-surface {
+    background-color: transparent !important;
+}

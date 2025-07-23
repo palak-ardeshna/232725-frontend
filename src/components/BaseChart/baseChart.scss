@@ -1,0 +1,511 @@
+@use '../../styles/variables' as *;
+
+.base-chart-container {
+    width: 100%;
+    margin-bottom: 16px;
+
+    .base-chart-card {
+        height: 100%;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        background-color: var(--bg-card) !important;
+        border: 1px solid var(--border-color) !important;
+
+        .ant-card-head {
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 16px;
+
+            .ant-card-head-title {
+                font-size: 16px;
+                font-weight: 600;
+                padding: 12px 0;
+                color: var(--text-primary) !important;
+            }
+        }
+
+        .ant-card-body {
+            padding: 16px;
+        }
+    }
+
+    .chart-title-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .chart-type-dropdown-button {
+            padding: 0 8px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-secondary);
+            border-color: var(--border-color);
+            background-color: var(--bg-card);
+
+            &:hover {
+                color: var(--text-white) !important;
+                border-color: var(--primary-color) !important;
+                background: $gradient-primary;
+            }
+
+            .anticon {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .chart-loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+    }
+
+    .chart-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        .total-count-wrapper {
+            text-align: center;
+
+            .total-count {
+                font-size: 32px;
+                font-weight: 600;
+                color: var(--primary-color);
+            }
+
+            .total-label {
+                font-size: 14px;
+                color: var(--text-secondary);
+            }
+        }
+
+        .chart-items {
+            .chart-item {
+                margin-bottom: 16px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .chart-item-header {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 8px;
+
+                    .chart-item-name {
+                        font-size: 14px;
+                        color: var(--text-primary);
+                    }
+
+                    .chart-item-value {
+                        font-weight: 600;
+                        color: var(--text-primary);
+                    }
+                }
+
+                .chart-progress {
+                    margin-bottom: 4px;
+                }
+
+                .chart-percentage {
+                    text-align: right;
+                    font-size: 12px;
+                    color: var(--text-secondary);
+                }
+            }
+        }
+
+        // Donut chart styles
+        .donut-chart-wrapper {
+            display: flex;
+            flex-direction: column;
+
+            .donut-chart {
+                display: flex;
+                height: 24px;
+                width: 100%;
+                border-radius: 12px;
+                overflow: hidden;
+                margin-bottom: 16px;
+
+                .donut-segment {
+                    height: 100%;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        opacity: 0.8;
+                        transform: scaleY(1.1);
+                    }
+                }
+            }
+
+            .donut-legend {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+
+                .legend-item {
+                    display: flex;
+                    align-items: center;
+
+                    .legend-color {
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        margin-right: 8px;
+                    }
+
+                    .legend-name {
+                        flex: 1;
+                        font-size: 12px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        color: var(--text-primary);
+                    }
+
+                    .legend-value {
+                        font-size: 12px;
+                        font-weight: 600;
+                        color: var(--text-secondary);
+                        margin-left: 4px;
+                    }
+                }
+            }
+        }
+
+        // Bar chart styles (vertical bars)
+        .bar-chart-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 200px;
+            margin-top: 20px;
+
+            .bar-chart {
+                display: flex;
+                justify-content: space-around;
+                align-items: flex-end;
+                height: 100%;
+                width: 100%;
+
+                .bar-chart-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    height: 100%;
+                    position: relative;
+
+                    .bar-chart-bar {
+                        border-radius: 4px 4px 0 0;
+                        transition: all 0.3s ease;
+
+                        &:hover {
+                            filter: brightness(1.1);
+                            transform: scaleY(1.05);
+                        }
+                    }
+
+                    .bar-chart-label {
+                        margin-top: 8px;
+                        font-size: 12px;
+                        color: var(--text-secondary);
+                        text-align: center;
+                        max-width: 80px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+
+        // Line chart styles
+        .line-chart-wrapper {
+            display: flex;
+            flex-direction: column;
+
+            .line-chart-container {
+                margin-bottom: 16px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 16px;
+                background-color: var(--bg-card);
+
+                .line-chart-svg {
+                    svg {
+                        overflow: visible;
+                    }
+                }
+            }
+
+            .chart-legend {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+
+                .legend-item {
+                    display: flex;
+                    align-items: center;
+
+                    .legend-color {
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        margin-right: 8px;
+                    }
+
+                    .legend-name {
+                        flex: 1;
+                        font-size: 12px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        color: var(--text-primary);
+                    }
+
+                    .legend-value {
+                        font-size: 12px;
+                        font-weight: 600;
+                        color: var(--text-secondary);
+                        margin-left: 4px;
+                    }
+                }
+            }
+        }
+
+        // Area chart styles
+        .area-chart-wrapper {
+            display: flex;
+            flex-direction: column;
+
+            .area-chart-container {
+                margin-bottom: 16px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 16px;
+                background-color: var(--bg-card);
+
+                .area-chart-svg {
+                    svg {
+                        overflow: visible;
+                    }
+                }
+            }
+
+            .chart-legend {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+
+                .legend-item {
+                    display: flex;
+                    align-items: center;
+
+                    .legend-color {
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        margin-right: 8px;
+                    }
+
+                    .legend-name {
+                        flex: 1;
+                        font-size: 12px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        color: var(--text-primary);
+                    }
+
+                    .legend-value {
+                        font-size: 12px;
+                        font-weight: 600;
+                        color: var(--text-secondary);
+                        margin-left: 4px;
+                    }
+                }
+            }
+        }
+
+        // Table chart styles
+        .table-chart-wrapper {
+            margin-top: 16px;
+
+            .table-chart {
+                width: 100%;
+                border-collapse: collapse;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+                border: 1px solid var(--border-color) !important;
+
+                th,
+                td {
+                    padding: 10px;
+                    text-align: left;
+                    border: 1px solid var(--border-color);
+                }
+
+                th {
+                    font-weight: 600;
+                    color: var(--text-white);
+                    background: $gradient-primary;
+                }
+
+                td {
+                    color: var(--text-secondary);
+                    background: $gradient-secondary;
+                }
+
+                tr:hover {
+                    background-color: var(--bg-hover);
+                }
+
+                .table-name {
+                    display: flex;
+                    align-items: center;
+
+                    .table-color {
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        margin-right: 8px;
+                    }
+
+                    span {
+                        color: var(--text-primary);
+                    }
+                }
+            }
+        }
+
+        // Column chart styles
+        .vertical-bar-chart-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 200px;
+            margin-top: 20px;
+
+            .vertical-bar-chart {
+                display: flex;
+                justify-content: space-around;
+                align-items: flex-end;
+                height: 100%;
+                width: 100%;
+
+                .vertical-bar-chart-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    height: 100%;
+                    position: relative;
+
+                    .vertical-bar-chart-bar {
+                        border-radius: 4px 4px 0 0;
+                        transition: all 0.3s ease;
+
+                        &:hover {
+                            filter: brightness(1.1);
+                            transform: scaleY(1.05);
+                        }
+                    }
+
+                    .vertical-bar-chart-label {
+                        margin-top: 8px;
+                        font-size: 12px;
+                        color: var(--text-secondary);
+                        text-align: center;
+                        max-width: 80px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .base-chart-container {
+        .chart-wrapper {
+
+            .donut-chart-wrapper .donut-legend,
+            .line-chart-wrapper .chart-legend,
+            .area-chart-wrapper .chart-legend {
+                grid-template-columns: 1fr;
+            }
+
+            .bar-chart-wrapper {
+                height: 150px;
+
+                .bar-chart-item .bar-chart-label {
+                    font-size: 10px;
+                    max-width: 60px;
+                }
+            }
+
+            .table-chart-wrapper {
+                overflow-x: auto;
+            }
+
+            .vertical-bar-chart-wrapper {
+                height: 180px;
+
+                .vertical-bar-chart {
+                    height: 150px;
+
+                    .vertical-bar-chart-item {
+                        .vertical-bar-chart-bar {
+                            width: 20px;
+                        }
+
+                        .vertical-bar-chart-label {
+                            font-size: 10px;
+                            max-width: 60px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Define color variables for charts
+:root {
+    --color-1: #0284c7; // blue
+    --color-2: #06b6d4; // cyan
+    --color-3: #f97316; // orange
+    --color-4: #8b5cf6; // purple
+    --color-5: #10b981; // emerald
+    --color-6: #f43f5e; // rose
+    --color-7: #fbbf24; // amber
+    --color-8: #6366f1; // indigo
+    --hover-bg: rgba(0, 0, 0, 0.04); // hover background for dark/light mode compatibility
+}
+
+// Custom styling for dropdown menu
+.ant-dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--bg-card);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--border-color);
+        border-radius: 3px;
+
+        &:hover {
+            background-color: var(--primary-color);
+        }
+    }
+}
