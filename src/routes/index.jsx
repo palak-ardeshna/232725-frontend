@@ -90,6 +90,9 @@ const modules = {
         "dashboard": <Dashboard />,
         "profile": <Profile />,
         "notes": <NotesPage />,
+        "inquiry": <ProtectedRoute requiredPermission={{ module: "inquiry", action: "read" }}><InquiryModule /></ProtectedRoute>,
+        "company": <ProtectedRoute requiredPermission={{ module: "company", action: "read" }}><CompanyModule /></ProtectedRoute>,
+        "plan": <ProtectedRoute requiredPermission={{ module: "plan", action: "read" }}><PlanModule /></ProtectedRoute>,
         "role": <ProtectedRoute requiredPermission={{ module: "role", action: "read" }}><Role /></ProtectedRoute>,
         "project": <ProtectedRoute requiredPermission={{ module: "project", action: "read" }}><Project /></ProtectedRoute>,
         "project/overview/:id": <ProtectedRoute requiredPermission={{ module: "project", action: "read" }}><ProjectOverview /></ProtectedRoute>
@@ -120,9 +123,9 @@ const modules = {
         "holiday": <ProtectedRoute requiredPermission={{ module: "holiday", action: "read" }}><HolidayModule /></ProtectedRoute>,
         "leave": <ProtectedRoute requiredPermission={{ module: "leave", action: "read" }}><LeaveModule /></ProtectedRoute>,
         "attendance": <ProtectedRoute requiredPermission={{ module: "attendance", action: "read" }}><AttendanceModule /></ProtectedRoute>,
-        "inquiry": <ProtectedRoute requiredPermission={{ module: "inquiry", action: "read" }}><InquiryModule /></ProtectedRoute>,
-        "company": <ProtectedRoute requiredPermission={{ module: "company", action: "read" }}><CompanyModule /></ProtectedRoute>,
-        "plan": <ProtectedRoute requiredPermission={{ module: "plan", action: "read" }}><PlanModule /></ProtectedRoute>,
+        // "inquiry": <ProtectedRoute requiredPermission={{ module: "inquiry", action: "read" }}><InquiryModule /></ProtectedRoute>,
+        // "company": <ProtectedRoute requiredPermission={{ module: "company", action: "read" }}><CompanyModule /></ProtectedRoute>,
+        // "plan": <ProtectedRoute requiredPermission={{ module: "plan", action: "read" }}><PlanModule /></ProtectedRoute>,
     },
     settings: {
         "office": <ProtectedRoute requiredPermission={{ module: "settings", action: "read" }}><SettingsModule /></ProtectedRoute>
@@ -176,6 +179,18 @@ const router = createBrowserRouter([
             {
                 path: "notes",
                 element: <ErrorBoundary><NotesPage /></ErrorBoundary>
+            },
+            {
+                path: "inquiry",
+                element: <ErrorBoundary><ProtectedRoute requiredPermission={{ module: "inquiry", action: "read" }}><InquiryModule /></ProtectedRoute></ErrorBoundary>
+            },
+            {
+                path: "company",
+                element: <ErrorBoundary><ProtectedRoute requiredPermission={{ module: "company", action: "read" }}><CompanyModule /></ProtectedRoute></ErrorBoundary>
+            },
+            {
+                path: "plan",
+                element: <ErrorBoundary><ProtectedRoute requiredPermission={{ module: "plan", action: "read" }}><PlanModule /></ProtectedRoute></ErrorBoundary>
             },
             {
                 path: "role",

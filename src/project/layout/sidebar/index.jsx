@@ -98,185 +98,152 @@ const DashboardSidebar = ({ collapsed, isMobile, onBackClick }) => {
     };
 
     const crmMenuItems = [
-        {
-            key: `${getBasePath()}/crm/lead`,
-            icon: <RiTeamLine />,
-            label: 'Lead',
-            onClick: () => {
-                setCrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/crm/lead`);
-            },
-            permission: 'lead',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/crm/contact`,
-            icon: <RiContactsLine />,
-            label: 'Contact',
-            onClick: () => {
-                setCrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/crm/contact`);
-            },
-            permission: 'contact',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/crm/client`,
-            icon: <RiUserLine />,
-            label: 'Client',
-            onClick: () => {
-                setCrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/crm/client`);
-            },
-            permission: 'client',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/crm/proposal`,
-            icon: <RiFileTextLine />,
-            label: 'Proposal',
-            onClick: () => {
-                setCrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/crm/proposal`);
-            },
-            permission: 'proposal',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/crm/system`,
-            icon: <RiCustomerService2Line />,
-            label: 'CRM System',
-            onClick: () => {
-                setCrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/crm/system`);
-            },
-            permission: 'system',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/crm/task`,
-            icon: <RiCalendarLine />,
-            label: 'Task',
-            onClick: () => {
-                setCrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/crm/task`);
-            },
-            permission: 'task',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        }
+        // {
+        //     key: `${getBasePath()}/crm/lead`,
+        //     icon: <RiTeamLine />,
+        //     label: 'Lead',
+        //     onClick: () => {
+        //         setCrmPopoverVisible(false);
+        //         handleMenuItemClick(`${getBasePath()}/crm/lead`);
+        //     },
+        //     permission: 'lead',
+        //     className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        // },
+        // {
+        //     key: `${getBasePath()}/crm/contact`,
+        //     icon: <RiContactsLine />,
+        //     label: 'Contact',
+        //     onClick: () => {
+        //         setCrmPopoverVisible(false);
+        //         handleMenuItemClick(`${getBasePath()}/crm/contact`);
+        //     },
+        //     permission: 'contact',
+        //     className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        // },
+        // {
+        //     key: `${getBasePath()}/crm/client`,
+        //     icon: <RiUserLine />,
+        //     label: 'Client',
+        //     onClick: () => {
+        //         setCrmPopoverVisible(false);
+        //         handleMenuItemClick(`${getBasePath()}/crm/client`);
+        //     },
+        //     permission: 'client',
+        //     className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        // },
+        // {
+        //     key: `${getBasePath()}/crm/proposal`,
+        //     icon: <RiFileTextLine />,
+        //     label: 'Proposal',
+        //     onClick: () => {
+        //         setCrmPopoverVisible(false);
+        //         handleMenuItemClick(`${getBasePath()}/crm/proposal`);
+        //     },
+        //     permission: 'proposal',
+        //     className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        // },
+        // {
+        //     key: `${getBasePath()}/crm/system`,
+        //     icon: <RiCustomerService2Line />,
+        //     label: 'CRM System',
+        //     onClick: () => {
+        //         setCrmPopoverVisible(false);
+        //         handleMenuItemClick(`${getBasePath()}/crm/system`);
+        //     },
+        //     permission: 'system',
+        //     className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        // },
+        // {
+        //     key: `${getBasePath()}/crm/task`,
+        //     icon: <RiCalendarLine />,
+        //     label: 'Task',
+        //     onClick: () => {
+        //         setCrmPopoverVisible(false);
+        //         handleMenuItemClick(`${getBasePath()}/crm/task`);
+        //     },
+        //     permission: 'task',
+        //     className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        // }
     ];
 
     const hrmMenuItems = [
-        {
-            key: `${getBasePath()}/hrm/employee`,
-            icon: <RiUserLine />,
-            label: 'Employee',
-            onClick: () => {
-                setHrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/hrm/employee`);
-            },
-            permission: 'employee',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/hrm/designation`,
-            icon: <RiUserStarLine />,
-            label: 'Designation',
-            onClick: () => {
-                setHrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/hrm/designation`);
-            },
-            permission: 'designation',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/hrm/department`,
-            icon: <RiGroupLine />,
-            label: 'Department',
-            onClick: () => {
-                setHrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/hrm/department`);
-            },
-            permission: 'department',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/hrm/team-member`,
-            icon: <RiTeamFill />,
-            label: 'Team',
-            onClick: () => {
-                setHrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/hrm/team-member`);
-            },
-            permission: 'teamMember',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/hrm/leave`,
-            icon: <RiCalendarLine />,
-            label: 'Leave',
-            onClick: () => {
-                setHrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/hrm/leave`);
-            },
-            permission: 'leave',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/hrm/attendance`,
-            icon: <RiCalendarLine />,
-            label: 'Attendance',
-            onClick: () => {
-                setHrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/hrm/attendance`);
-            },
-            permission: 'attendance',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/hrm/holiday`,
-            icon: <RiCalendarLine />,
-            label: 'Holiday',
-            onClick: () => {
-                setHrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/hrm/holiday`);
-            },
-            permission: 'holiday',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/hrm/inquiry`,
-            icon: <RiMessage2Fill />,
-            label: 'Inquiry',
-            onClick: () => {
-                setHrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/hrm/inquiry`);
-            },
-            permission: 'inquiry',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/hrm/company`,
-            icon: <RiBuildingLine />,
-            label: 'Company',
-            onClick: () => {
-                setHrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/hrm/company`);
-            },
-            permission: 'company',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        },
-        {
-            key: `${getBasePath()}/hrm/plan`,
-            icon: <RiPriceTag3Line />,
-            label: 'Plans',
-            onClick: () => {
-                setHrmPopoverVisible(false);
-                handleMenuItemClick(`${getBasePath()}/hrm/plan`);
-            },
-            permission: 'plan',
-            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        }
+    //     {
+    //         key: `${getBasePath()}/hrm/employee`,
+    //         icon: <RiUserLine />,
+    //         label: 'Employee',
+    //         onClick: () => {
+    //             setHrmPopoverVisible(false);
+    //             handleMenuItemClick(`${getBasePath()}/hrm/employee`);
+    //         },
+    //         permission: 'employee',
+    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+    //     },
+    //     {
+    //         key: `${getBasePath()}/hrm/designation`,
+    //         icon: <RiUserStarLine />,
+    //         label: 'Designation',
+    //         onClick: () => {
+    //             setHrmPopoverVisible(false);
+    //             handleMenuItemClick(`${getBasePath()}/hrm/designation`);
+    //         },
+    //         permission: 'designation',
+    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+    //     },
+    //     {
+    //         key: `${getBasePath()}/hrm/department`,
+    //         icon: <RiGroupLine />,
+    //         label: 'Department',
+    //         onClick: () => {
+    //             setHrmPopoverVisible(false);
+    //             handleMenuItemClick(`${getBasePath()}/hrm/department`);
+    //         },
+    //         permission: 'department',
+    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+    //     },
+    //     {
+    //         key: `${getBasePath()}/hrm/team-member`,
+    //         icon: <RiTeamFill />,
+    //         label: 'Team',
+    //         onClick: () => {
+    //             setHrmPopoverVisible(false);
+    //             handleMenuItemClick(`${getBasePath()}/hrm/team-member`);
+    //         },
+    //         permission: 'teamMember',
+    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+    //     },
+    //     {
+    //         key: `${getBasePath()}/hrm/leave`,
+    //         icon: <RiCalendarLine />,
+    //         label: 'Leave',
+    //         onClick: () => {
+    //             setHrmPopoverVisible(false);
+    //             handleMenuItemClick(`${getBasePath()}/hrm/leave`);
+    //         },
+    //         permission: 'leave',
+    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+    //     },
+    //     {
+    //         key: `${getBasePath()}/hrm/attendance`,
+    //         icon: <RiCalendarLine />,
+    //         label: 'Attendance',
+    //         onClick: () => {
+    //             setHrmPopoverVisible(false);
+    //             handleMenuItemClick(`${getBasePath()}/hrm/attendance`);
+    //         },
+    //         permission: 'attendance',
+    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+    //     },
+    //     {
+    //         key: `${getBasePath()}/hrm/holiday`,
+    //         icon: <RiCalendarLine />,
+    //         label: 'Holiday',
+    //         onClick: () => {
+    //             setHrmPopoverVisible(false);
+    //             handleMenuItemClick(`${getBasePath()}/hrm/holiday`);
+    //         },
+    //         permission: 'holiday',
+    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+    //     }
     ];
 
     // Settings menu items - sarkhu banv setting mate
@@ -300,8 +267,7 @@ const DashboardSidebar = ({ collapsed, isMobile, onBackClick }) => {
     });
 
     const filteredHrmMenuItems = hrmMenuItems.filter(item => {
-        const permitted = hasPermission(user?.userType, userPermissions, item.permission);
-        return permitted;
+        return !['company', 'plan', 'inquiry'].includes(item.permission) && hasPermission(user?.userType, userPermissions, item.permission);
     });
 
     const filteredSettingsMenuItems = settingsMenuItems.filter(item => {
@@ -387,7 +353,32 @@ const DashboardSidebar = ({ collapsed, isMobile, onBackClick }) => {
             permission: 'role',
             adminOnly: true,
             className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-        }
+        },
+        {
+            key: `${getBasePath()}/inquiry`,
+            icon: <RiMessage2Fill />,
+            label: 'Inquiry',
+            onClick: () => handleMenuItemClick(`${getBasePath()}/inquiry`),
+            permission: 'inquiry',
+            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        },
+        {
+            key: `${getBasePath()}/company`,
+            icon: <RiBuildingLine />,
+            label: 'Company',
+            onClick: () => handleMenuItemClick(`${getBasePath()}/company`),
+            permission: 'company',
+            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        },
+        {
+            key: `${getBasePath()}/plan`,
+            icon: <RiPriceTag3Line />,
+            label: 'Plans',
+            onClick: () => handleMenuItemClick(`${getBasePath()}/plan`),
+            permission: 'plan',
+            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        },
+        
     ];
 
     const menuItems = items
