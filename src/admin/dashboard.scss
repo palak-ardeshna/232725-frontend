@@ -1,0 +1,11 @@
+@use '../styles/variables' as *;
+
+.dashboard {
+    padding: 10px;
+    width: 100%;
+    margin: 0 auto;
+
+    .dashboard-charts-row {
+        margin-top: 8px;
+    }
+}

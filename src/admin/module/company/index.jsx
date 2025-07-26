@@ -5,9 +5,9 @@ import { RiBuildingLine } from 'react-icons/ri';
 import { useLocation } from 'react-router-dom';
 import CompanyList from './components/CompanyList';
 import CompanyForm from './components/CompanyForm';
-import { ModalTitle } from '../../../../components/AdvancedForm';
-import ModuleLayout from '../../../../components/ModuleLayout';
-import { companyApi, inquiryApi } from '../../../../config/api/apiServices';
+import { ModalTitle } from '../../../components/AdvancedForm';
+import ModuleLayout from '../../../components/ModuleLayout';
+import { companyApi, inquiryApi } from '../../../config/api/apiServices';
 import './company.scss';
 
 const Company = () => {
@@ -83,6 +83,22 @@ const Company = () => {
 
     const handleFormSubmit = async (values) => {
         try {
+            // Ensure address is an object, not a string
+            if (values.address && typeof values.address === 'string') {
+                try {
+                    values.address = JSON.parse(values.address);
+                } catch (e) {
+                    console.error('Error parsing address:', e);
+                    values.address = {};
+                }
+            }
+
+            // Set default values for status and payment_status when adding a new company
+            if (!formModal.data) {
+                values.status = values.status || 'active';
+                values.payment_status = values.payment_status || 'unpaid';
+            }
+
             if (formModal.data) {
                 console.log('Updating company with values:', values);
                 

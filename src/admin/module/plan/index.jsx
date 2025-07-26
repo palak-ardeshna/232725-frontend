@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { Modal, message, Tooltip } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
-import { RiMessage2Fill, RiBuildingLine } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
-import InquiryList from './components/InquiryList';
-import InquiryForm from './components/InquiryForm';
-import { ModalTitle } from '../../../../components/AdvancedForm';
-import ModuleLayout from '../../../../components/ModuleLayout';
-import { inquiryApi, companyApi } from '../../../../config/api/apiServices';
-import './inquiry.scss';
+import { RiPriceTag3Line } from 'react-icons/ri';
+import PlanList from './components/PlanList';
+import PlanForm from './components/PlanForm';
+import { ModalTitle } from '../../../components/AdvancedForm';
+import ModuleLayout from '../../../components/ModuleLayout';
+import { planApi } from '../../../config/api/apiServices';
+import './plan.scss';
 
-const Inquiry = () => {
-    const navigate = useNavigate();
+const Plan = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
 
@@ -20,17 +18,16 @@ const Inquiry = () => {
     const [bulkDeleteModal, setBulkDeleteModal] = useState({ visible: false, ids: [] });
     const [formKey, setFormKey] = useState(Date.now());
 
-    const { data: response, isLoading, refetch } = inquiryApi.useGetAllQuery({
+    const { data: response, isLoading, refetch } = planApi.useGetAllQuery({
         page: currentPage,
         limit: pageSize,
     });
 
-    const [deleteInquiry, { isLoading: isDeleting }] = inquiryApi.useDeleteMutation();
-    const [createInquiry, { isLoading: isCreating }] = inquiryApi.useCreateMutation();
-    const [updateInquiry, { isLoading: isUpdating }] = inquiryApi.useUpdateMutation();
-    const [createCompany] = companyApi.useCreateMutation();
+    const [deletePlan, { isLoading: isDeleting }] = planApi.useDeleteMutation();
+    const [createPlan, { isLoading: isCreating }] = planApi.useCreateMutation();
+    const [updatePlan, { isLoading: isUpdating }] = planApi.useUpdateMutation();
 
-    const inquiries = response?.data?.items || [];
+    const plans = response?.data?.items || [];
     const total = response?.data?.total || 0;
     const currentPageFromServer = response?.data?.currentPage || 1;
 
@@ -44,8 +41,8 @@ const Inquiry = () => {
         setFormModal({ visible: true, data: null });
     };
 
-    const handleEdit = (inquiry) => setFormModal({ visible: true, data: inquiry });
-    const handleDelete = (inquiry) => setDeleteModal({ visible: true, data: inquiry });
+    const handleEdit = (plan) => setFormModal({ visible: true, data: plan });
+    const handleDelete = (plan) => setDeleteModal({ visible: true, data: plan });
 
     const handleFormCancel = () => setFormModal({ visible: false, data: null });
     const handleDeleteCancel = () => setDeleteModal({ visible: false, data: null });
@@ -54,30 +51,30 @@ const Inquiry = () => {
     const handleFormSubmit = async (values) => {
         try {
             if (formModal.data) {
-                await updateInquiry({
+                await updatePlan({
                     id: formModal.data.id,
                     data: values
                 }).unwrap();
-                message.success('Inquiry updated successfully');
+                message.success('Plan updated successfully');
             } else {
-                await createInquiry(values).unwrap();
-                message.success('Inquiry created successfully');
+                await createPlan(values).unwrap();
+                message.success('Plan created successfully');
             }
             setFormModal({ visible: false, data: null });
             refetch();
         } catch (error) {
-            message.error(`Failed to ${formModal.data ? 'update' : 'create'} inquiry: ${error.data?.message || error.message}`);
+            message.error(`Failed to ${formModal.data ? 'update' : 'create'} plan: ${error.data?.message || error.message}`);
         }
     };
 
     const handleDeleteConfirm = async () => {
         try {
-            await deleteInquiry(deleteModal.data.id).unwrap();
-            message.success('Inquiry deleted successfully');
+            await deletePlan(deleteModal.data.id).unwrap();
+            message.success('Plan deleted successfully');
             setDeleteModal({ visible: false, data: null });
             refetch();
         } catch (error) {
-            message.error('Failed to delete inquiry');
+            message.error('Failed to delete plan');
         }
     };
 
@@ -95,11 +92,11 @@ const Inquiry = () => {
 
             for (const id of ids) {
                 try {
-                    await deleteInquiry(id).unwrap();
+                    await deletePlan(id).unwrap();
                     successCount++;
                 } catch (error) {
                     errorCount++;
-                    message.error(`Failed to delete inquiry with ID ${id}:`, error);
+                    message.error(`Failed to delete plan with ID ${id}:`, error);
                 }
             }
 
@@ -107,11 +104,11 @@ const Inquiry = () => {
             refetch();
 
             if (successCount > 0) {
-                message.success(`Successfully deleted ${successCount} inquiry${successCount > 1 ? 'ies' : 'y'}`);
+                message.success(`Successfully deleted ${successCount} ${successCount > 1 ? 'plans' : 'plan'}`);
             }
 
             if (errorCount > 0) {
-                message.error(`Failed to delete ${errorCount} inquiry${errorCount > 1 ? 'ies' : 'y'}`);
+                message.error(`Failed to delete ${errorCount} ${errorCount > 1 ? 'plans' : 'plan'}`);
             }
         } catch (error) {
             message.error('An error occurred during bulk deletion');
@@ -119,36 +116,15 @@ const Inquiry = () => {
         }
     };
 
-    const handleConvertToCompany = async (inquiry) => {
-        try {
-            // Store inquiry data to localStorage for the company form
-            const companyData = {
-                name: inquiry.name || '',
-                description: inquiry.message || '',
-                contact_email: inquiry.email || '',
-                contact_phone: inquiry.phone || '',
-                source_inquiry_id: inquiry.id
-            };
-            
-            localStorage.setItem('convert_inquiry_to_company', JSON.stringify(companyData));
-            
-            // Navigate to company form
-            navigate('/admin/hrm/company', { state: { openAddModal: true, fromInquiry: true } });
-            
-        } catch (error) {
-            message.error('Failed to prepare company conversion');
-        }
-    };
-
     return (
         <ModuleLayout
-            module="inquiry"
-            title="Inquiries"
+            module="plan"
+            title="Plans"
             onAddClick={handleAdd}
-            className="inquiry"
+            className="plan"
         >
-            <InquiryList
-                inquiries={inquiries}
+            <PlanList
+                plans={plans}
                 isLoading={isLoading}
                 currentPage={currentPageFromServer}
                 pageSize={pageSize}
@@ -157,12 +133,11 @@ const Inquiry = () => {
                 onEdit={handleEdit}
                 onDelete={handleDelete}
                 onBulkDelete={handleBulkDelete}
-                refetchInquiries={refetch}
-                onConvertToCompany={handleConvertToCompany}
+                refetchPlans={refetch}
             />
 
             <Modal
-                title={<ModalTitle icon={RiMessage2Fill} title={formModal.data ? 'Edit Inquiry' : 'Add Inquiry'} />}
+                title={<ModalTitle icon={RiPriceTag3Line} title={formModal.data ? 'Edit Plan' : 'Add Plan'} />}
                 open={formModal.visible}
                 onCancel={handleFormCancel}
                 footer={null}
@@ -171,7 +146,7 @@ const Inquiry = () => {
                 maskClosable={true}
                 destroyOnHidden={true}
             >
-                <InquiryForm
+                <PlanForm
                     key={formKey}
                     initialValues={formModal.data}
                     isSubmitting={isCreating || isUpdating}
@@ -181,7 +156,7 @@ const Inquiry = () => {
             </Modal>
 
             <Modal
-                title={<ModalTitle icon={<DeleteOutlined />} title="Delete Inquiry" />}
+                title={<ModalTitle icon={<DeleteOutlined />} title="Delete Plan" />}
                 open={deleteModal.visible}
                 onOk={handleDeleteConfirm}
                 onCancel={handleDeleteCancel}
@@ -195,13 +170,13 @@ const Inquiry = () => {
                     loading: isDeleting
                 }}
             >
-                <p>Are you sure you want to delete inquiry from "
-                    {deleteModal.data?.name && (
-                        <Tooltip title={deleteModal.data.name}>
+                <p>Are you sure you want to delete plan "
+                    {deleteModal.data?.planName && (
+                        <Tooltip title={deleteModal.data.planName}>
                             <span>
-                                {deleteModal.data.name.length > 30 
-                                    ? `${deleteModal.data.name.substring(0, 30)}...` 
-                                    : deleteModal.data.name}
+                                {deleteModal.data.planName.length > 30 
+                                    ? `${deleteModal.data.planName.substring(0, 30)}...` 
+                                    : deleteModal.data.planName}
                             </span>
                         </Tooltip>
                     )}"?
@@ -210,7 +185,7 @@ const Inquiry = () => {
             </Modal>
 
             <Modal
-                title={<ModalTitle icon={<DeleteOutlined />} title="Bulk Delete Inquiries" />}
+                title={<ModalTitle icon={<DeleteOutlined />} title="Bulk Delete Plans" />}
                 open={bulkDeleteModal.visible}
                 onOk={handleBulkDeleteConfirm}
                 onCancel={handleBulkDeleteCancel}
@@ -224,11 +199,11 @@ const Inquiry = () => {
                     loading: isDeleting
                 }}
             >
-                <p>Are you sure you want to delete {bulkDeleteModal.ids.length} selected inquiries?</p>
+                <p>Are you sure you want to delete {bulkDeleteModal.ids.length} selected plans?</p>
                 <p>This action cannot be undone.</p>
             </Modal>
         </ModuleLayout>
     );
 };
 
-export default Inquiry; 
+export default Plan; 

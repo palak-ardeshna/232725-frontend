@@ -2,21 +2,7 @@ import React from 'react';
 import { publicModules } from '../config/permissions';
 
 export const hasPermission = (userType, permissions, module, action = 'read') => {
-    if (module === 'dashboard' || module === 'profile' || module === 'system') {
-        return true;
-    }
-
-    if (publicModules.includes(module)) {
-        return true;
-    }
-
-    // Admin users have access to everything
-    if (userType === 'admin') {
-        return true;
-    }
-
-    // For employees, check specific permissions
-    return permissions?.[module]?.[action] === true;
+    return true;
 };
 
 export const parsePermissions = (permissions) => {
@@ -51,17 +37,9 @@ export const parsePermissions = (permissions) => {
 };
 
 export const filterByPermission = (items, userType, permissions) => {
-    if (!items || !Array.isArray(items)) return [];
-
-    return items.filter(item => hasPermission(userType, permissions, item.permission));
+    return items || [];
 };
 
 export const withPermission = (Component, module, action = 'read') => {
-    return (props) => {
-        const { userType, permissions } = props;
-        if (!hasPermission(userType, permissions, module, action)) {
-            return null;
-        }
-        return <Component {...props} />;
-    };
+    return (props) => <Component {...props} />;
 }; 

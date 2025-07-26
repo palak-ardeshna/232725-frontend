@@ -2,9 +2,9 @@ import React from 'react';
 import { EditOutlined, DeleteOutlined, StarOutlined } from '@ant-design/icons';
 import { message, Tooltip, Tag } from 'antd';
 import dayjs from 'dayjs';
-import CommonTable from '../../../../../components/CommonTable';
-import { generateColumns } from '../../../../../utils/tableUtils.jsx';
-import { planApi } from '../../../../../config/api/apiServices';
+import CommonTable from '../../../../components/CommonTable';
+import { generateColumns } from '../../../../utils/tableUtils.jsx';
+import { planApi } from '../../../../config/api/apiServices';
 
 const PlanList = ({
     plans,

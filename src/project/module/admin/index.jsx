@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Modal, message, Tooltip } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
-import { RiPriceTag3Line } from 'react-icons/ri';
-import PlanList from './components/PlanList';
-import PlanForm from './components/PlanForm';
-import { ModalTitle } from '../../../../components/AdvancedForm';
-import ModuleLayout from '../../../../components/ModuleLayout';
-import { planApi } from '../../../../config/api/apiServices';
-import './plan.scss';
+import { FaUserShield } from 'react-icons/fa';
+import AdminList from './components/AdminList';
+import AdminForm from './components/AdminForm';
+import { ModalTitle } from '../../../components/AdvancedForm';
+import ModuleLayout from '../../../components/ModuleLayout';
+import { adminApi } from '../../../config/api/apiServices';
+import './admin.scss';
 
-const Plan = () => {
+const Admin = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
 
@@ -18,16 +18,16 @@ const Plan = () => {
     const [bulkDeleteModal, setBulkDeleteModal] = useState({ visible: false, ids: [] });
     const [formKey, setFormKey] = useState(Date.now());
 
-    const { data: response, isLoading, refetch } = planApi.useGetAllQuery({
+    const { data: response, isLoading, refetch } = adminApi.useGetAllQuery({
         page: currentPage,
         limit: pageSize,
     });
 
-    const [deletePlan, { isLoading: isDeleting }] = planApi.useDeleteMutation();
-    const [createPlan, { isLoading: isCreating }] = planApi.useCreateMutation();
-    const [updatePlan, { isLoading: isUpdating }] = planApi.useUpdateMutation();
+    const [deleteAdmin, { isLoading: isDeleting }] = adminApi.useDeleteMutation();
+    const [createAdmin, { isLoading: isCreating }] = adminApi.useCreateMutation();
+    const [updateAdmin, { isLoading: isUpdating }] = adminApi.useUpdateMutation();
 
-    const plans = response?.data?.items || [];
+    const admins = response?.data?.items || [];
     const total = response?.data?.total || 0;
     const currentPageFromServer = response?.data?.currentPage || 1;
 
@@ -41,8 +41,14 @@ const Plan = () => {
         setFormModal({ visible: true, data: null });
     };
 
-    const handleEdit = (plan) => setFormModal({ visible: true, data: plan });
-    const handleDelete = (plan) => setDeleteModal({ visible: true, data: plan });
+    const handleEdit = (admin) => {
+        console.log('Editing admin:', admin);
+        // Force a new form key to ensure the form is re-rendered with fresh data
+        setFormKey(Date.now());
+        setFormModal({ visible: true, data: admin });
+    };
+    
+    const handleDelete = (admin) => setDeleteModal({ visible: true, data: admin });
 
     const handleFormCancel = () => setFormModal({ visible: false, data: null });
     const handleDeleteCancel = () => setDeleteModal({ visible: false, data: null });
@@ -51,30 +57,37 @@ const Plan = () => {
     const handleFormSubmit = async (values) => {
         try {
             if (formModal.data) {
-                await updatePlan({
+                console.log('Updating admin with values:', values);
+                
+                // Make sure it has the ID
+                values.id = formModal.data.id;
+                
+                await updateAdmin({
                     id: formModal.data.id,
                     data: values
                 }).unwrap();
-                message.success('Plan updated successfully');
+                message.success('Admin updated successfully');
             } else {
-                await createPlan(values).unwrap();
-                message.success('Plan created successfully');
+                console.log('Creating new admin with values:', values);
+                const result = await createAdmin(values).unwrap();
+                message.success('Admin created successfully');
             }
             setFormModal({ visible: false, data: null });
             refetch();
         } catch (error) {
-            message.error(`Failed to ${formModal.data ? 'update' : 'create'} plan: ${error.data?.message || error.message}`);
+            console.error('Form submission error:', error);
+            message.error(`Failed to ${formModal.data ? 'update' : 'create'} admin: ${error.data?.message || error.message}`);
         }
     };
 
     const handleDeleteConfirm = async () => {
         try {
-            await deletePlan(deleteModal.data.id).unwrap();
-            message.success('Plan deleted successfully');
+            await deleteAdmin(deleteModal.data.id).unwrap();
+            message.success('Admin deleted successfully');
             setDeleteModal({ visible: false, data: null });
             refetch();
         } catch (error) {
-            message.error('Failed to delete plan');
+            message.error('Failed to delete admin');
         }
     };
 
@@ -92,11 +105,11 @@ const Plan = () => {
 
             for (const id of ids) {
                 try {
-                    await deletePlan(id).unwrap();
+                    await deleteAdmin(id).unwrap();
                     successCount++;
                 } catch (error) {
                     errorCount++;
-                    message.error(`Failed to delete plan with ID ${id}:`, error);
+                    message.error(`Failed to delete admin with ID ${id}:`, error);
                 }
             }
 
@@ -104,11 +117,11 @@ const Plan = () => {
             refetch();
 
             if (successCount > 0) {
-                message.success(`Successfully deleted ${successCount} ${successCount > 1 ? 'plans' : 'plan'}`);
+                message.success(`Successfully deleted ${successCount} ${successCount > 1 ? 'admins' : 'admin'}`);
             }
 
             if (errorCount > 0) {
-                message.error(`Failed to delete ${errorCount} ${errorCount > 1 ? 'plans' : 'plan'}`);
+                message.error(`Failed to delete ${errorCount} ${errorCount > 1 ? 'admins' : 'admin'}`);
             }
         } catch (error) {
             message.error('An error occurred during bulk deletion');
@@ -118,13 +131,13 @@ const Plan = () => {
 
     return (
         <ModuleLayout
-            module="plan"
-            title="Plans"
+            module="admin"
+            title="Administrators"
             onAddClick={handleAdd}
-            className="plan"
+            className="admin"
         >
-            <PlanList
-                plans={plans}
+            <AdminList
+                admins={admins}
                 isLoading={isLoading}
                 currentPage={currentPageFromServer}
                 pageSize={pageSize}
@@ -133,20 +146,20 @@ const Plan = () => {
                 onEdit={handleEdit}
                 onDelete={handleDelete}
                 onBulkDelete={handleBulkDelete}
-                refetchPlans={refetch}
+                refetchAdmins={refetch}
             />
 
             <Modal
-                title={<ModalTitle icon={RiPriceTag3Line} title={formModal.data ? 'Edit Plan' : 'Add Plan'} />}
+                title={<ModalTitle icon={<FaUserShield />} title={formModal.data ? 'Edit Admin' : 'Add Admin'} />}
                 open={formModal.visible}
                 onCancel={handleFormCancel}
                 footer={null}
                 width={800}
                 className="modal"
                 maskClosable={true}
-                destroyOnHidden={true}
+                destroyOnClose={true}
             >
-                <PlanForm
+                <AdminForm
                     key={formKey}
                     initialValues={formModal.data}
                     isSubmitting={isCreating || isUpdating}
@@ -156,7 +169,7 @@ const Plan = () => {
             </Modal>
 
             <Modal
-                title={<ModalTitle icon={<DeleteOutlined />} title="Delete Plan" />}
+                title={<ModalTitle icon={<DeleteOutlined />} title="Delete Admin" />}
                 open={deleteModal.visible}
                 onOk={handleDeleteConfirm}
                 onCancel={handleDeleteCancel}
@@ -170,13 +183,13 @@ const Plan = () => {
                     loading: isDeleting
                 }}
             >
-                <p>Are you sure you want to delete plan "
-                    {deleteModal.data?.planName && (
-                        <Tooltip title={deleteModal.data.planName}>
+                <p>Are you sure you want to delete admin "
+                    {deleteModal.data?.username && (
+                        <Tooltip title={deleteModal.data.username}>
                             <span>
-                                {deleteModal.data.planName.length > 30 
-                                    ? `${deleteModal.data.planName.substring(0, 30)}...` 
-                                    : deleteModal.data.planName}
+                                {deleteModal.data.username.length > 30 
+                                    ? `${deleteModal.data.username.substring(0, 30)}...` 
+                                    : deleteModal.data.username}
                             </span>
                         </Tooltip>
                     )}"?
@@ -185,7 +198,7 @@ const Plan = () => {
             </Modal>
 
             <Modal
-                title={<ModalTitle icon={<DeleteOutlined />} title="Bulk Delete Plans" />}
+                title={<ModalTitle icon={<DeleteOutlined />} title="Bulk Delete Admins" />}
                 open={bulkDeleteModal.visible}
                 onOk={handleBulkDeleteConfirm}
                 onCancel={handleBulkDeleteCancel}
@@ -199,11 +212,11 @@ const Plan = () => {
                     loading: isDeleting
                 }}
             >
-                <p>Are you sure you want to delete {bulkDeleteModal.ids.length} selected plans?</p>
+                <p>Are you sure you want to delete {bulkDeleteModal.ids.length} selected admins?</p>
                 <p>This action cannot be undone.</p>
             </Modal>
         </ModuleLayout>
     );
 };
 
-export default Plan; 
+export default Admin; 

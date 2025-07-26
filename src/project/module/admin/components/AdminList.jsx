@@ -1,13 +1,13 @@
 import React from 'react';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { message, Tooltip, Tag } from 'antd';
+import { Tooltip, Tag } from 'antd';
 import dayjs from 'dayjs';
-import CommonTable from '../../../../../components/CommonTable';
-import { generateColumns } from '../../../../../utils/tableUtils.jsx';
-import { companyApi } from '../../../../../config/api/apiServices';
+import CommonTable from '../../../../components/CommonTable';
+import { generateColumns } from '../../../../utils/tableUtils.jsx';
+import { adminApi } from '../../../../config/api/apiServices';
 
-const CompanyList = ({
-    companies,
+const AdminList = ({
+    admins,
     isLoading,
     currentPage,
     pageSize,
@@ -16,9 +16,9 @@ const CompanyList = ({
     onEdit,
     onDelete,
     onBulkDelete,
-    refetchCompanies
+    refetchAdmins
 }) => {
-    const [updateCompany] = companyApi.useUpdateMutation();
+    const [updateAdmin] = adminApi.useUpdateMutation();
 
     const getStatusTag = (status) => {
         let color = '';
@@ -35,36 +35,10 @@ const CompanyList = ({
         return <Tag color={color}>{status}</Tag>;
     };
 
-    const getPaymentStatusTag = (status) => {
-        let color = '';
-        switch (status) {
-            case 'paid':
-                color = 'green';
-                break;
-            case 'unpaid':
-                color = 'red';
-                break;
-            case 'pending':
-                color = 'orange';
-                break;
-            default:
-                color = 'default';
-        }
-        return <Tag color={color}>{status}</Tag>;
-    };
-
-    // Helper function to get values from extra_details
-    const getExtraDetail = (record, field, defaultValue = 'N/A') => {
-        if (record?.extra_details && record.extra_details[field]) {
-            return record.extra_details[field];
-        }
-        return defaultValue;
-    };
-
     const fields = [
         {
-            name: 'name',
-            title: 'Company Name',
+            name: 'username',
+            title: 'Username',
             render: (text) => (
                 <div className="name-container">
                     <Tooltip title={text}>
@@ -81,23 +55,19 @@ const CompanyList = ({
             render: (text) => text || 'N/A'
         },
         {
-            name: 'phone',
-            title: 'Phone',
+            name: 'firstName',
+            title: 'First Name',
             render: (text) => text || 'N/A'
         },
         {
-            name: 'extra_details',
-            title: 'Industry',
-            render: (_, record) => (
-                <Tooltip title={getExtraDetail(record, 'industry')}>
-                    <span>{getExtraDetail(record, 'industry')}</span>
-                </Tooltip>
-            )
+            name: 'lastName',
+            title: 'Last Name',
+            render: (text) => text || 'N/A'
         },
         {
-            name: 'payment_status',
-            title: 'Payment',
-            render: (status) => getPaymentStatusTag(status)
+            name: 'phone',
+            title: 'Phone',
+            render: (text) => text || 'N/A'
         },
         {
             name: 'status',
@@ -117,7 +87,7 @@ const CompanyList = ({
             label: 'Edit',
             icon: <EditOutlined />,
             handler: onEdit,
-            module: 'company',
+            module: 'admin',
             permission: 'update'
         },
         {
@@ -126,7 +96,7 @@ const CompanyList = ({
             icon: <DeleteOutlined />,
             danger: true,
             handler: onDelete,
-            module: 'company',
+            module: 'admin',
             permission: 'delete'
         }
     ];
@@ -138,7 +108,7 @@ const CompanyList = ({
     return (
         <div className="table-list">
             <CommonTable
-                data={companies.map(company => ({ ...company, key: company.id }))}
+                data={admins.map(admin => ({ ...admin, key: admin.id }))}
                 columns={columns}
                 isLoading={isLoading}
                 pagination={{
@@ -149,17 +119,17 @@ const CompanyList = ({
                 }}
                 actionItems={actions}
                 extraProps={{
-                    itemName: 'companies',
-                    className: 'company-table'
+                    itemName: 'admins',
+                    className: 'admin-table'
                 }}
-                searchableColumns={['name', 'email', 'phone', 'status', 'payment_status']}
+                searchableColumns={['username', 'email', 'firstName', 'lastName', 'phone', 'status']}
                 dateColumns={['createdAt']}
                 rowSelection={true}
                 onBulkDelete={onBulkDelete}
-                module="company"
+                module="admin"
             />
         </div>
     );
 };
 
-export default CompanyList; 
+export default AdminList; 

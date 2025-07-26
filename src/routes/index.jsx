@@ -26,9 +26,10 @@ import ContactOverview from "../project/module/crm/contact/overview/index.jsx";
 import HolidayModule from "../project/module/hrm/holiday/index.jsx";
 import LeaveModule from "../project/module/hrm/leave/index.jsx";
 import AttendanceModule from "../project/module/hrm/attendance/index.jsx";
-import InquiryModule from "../project/module/hrm/inquiry/index.jsx";
-import CompanyModule from "../project/module/hrm/company/index.jsx";
-import PlanModule from "../project/module/hrm/plan/index.jsx";
+import InquiryModule from "../project/module/inquiry/index.jsx";
+import CompanyModule from "../project/module/company/index.jsx";
+import PlanModule from "../project/module/plan/index.jsx";
+import AdminModule from "../project/module/admin/index.jsx";
 import SettingsModule from "../project/module/hrm/settings/index.jsx";
 import Profile from "../project/module/profile/index.jsx";
 import { parsePermissions, hasPermission } from '../utils/permissionUtils.jsx';
@@ -36,14 +37,25 @@ import Task from "../project/module/crm/task/index.jsx";
 import CompanyDetailsPage from '../project/module/profile/components/CompanyDetailsPage';
 import { BuildOutlined } from '@ant-design/icons';
 
+// Set ama and aem for superadmin
+const ama = "superadmin";
+const aem = "superadmin";
 
 const ProtectedRoute = ({ children, requiredPermission }) => {
     const token = localStorage.getItem('token');
     const userJson = localStorage.getItem('user');
     const user = userJson ? JSON.parse(userJson) : null;
-    const userType = user?.userType?.replace(/\s+/g, '-') || localStorage.getItem('userType')?.replace(/\s+/g, '-') || 'admin';
+    let userType = user?.userType?.replace(/\s+/g, '-') || localStorage.getItem('userType')?.replace(/\s+/g, '-') || 'admin';
+    if (userType === 'superadmin') {
+        userType = ama;
+    }
     const permissions = parsePermissions(user?.permissions);
     const location = useLocation();
+
+    // Only allow admin and superadmin
+    if (userType !== 'admin' && userType !== 'superadmin') {
+        return <Navigate to="/login" replace />;
+    }
 
     // If no token, redirect to login
     if (!token) {
@@ -52,7 +64,7 @@ const ProtectedRoute = ({ children, requiredPermission }) => {
 
     // If employee without dashboard access trying to access anything except dashboard
     // Note: They still need dashboard route access to see the restriction message
-    if (user?.userType === 'employee' && user?.isDashboard === false &&
+    if (user?.userType === 'admin' && user?.isDashboard === false &&
         !location.pathname.includes('/dashboard')) {
         return <Navigate to={`/${userType}/dashboard`} replace />;
     }
@@ -68,7 +80,11 @@ const ProtectedRoute = ({ children, requiredPermission }) => {
 
 const PublicRoute = ({ children }) => {
     const token = localStorage.getItem('token');
-    const userType = localStorage.getItem('userType')?.replace(/\s+/g, '-') || 'admin';
+    let userType = localStorage.getItem('userType')?.replace(/\s+/g, '-') || 'admin';
+    // If userType is superadmin, override with ama/aem
+    if (userType === 'superadmin') {
+        userType = ama;
+    }
 
     // If authenticated, redirect to dashboard
     if (token) {
@@ -93,6 +109,7 @@ const modules = {
         "inquiry": <ProtectedRoute requiredPermission={{ module: "inquiry", action: "read" }}><InquiryModule /></ProtectedRoute>,
         "company": <ProtectedRoute requiredPermission={{ module: "company", action: "read" }}><CompanyModule /></ProtectedRoute>,
         "plan": <ProtectedRoute requiredPermission={{ module: "plan", action: "read" }}><PlanModule /></ProtectedRoute>,
+        "admin": <ProtectedRoute requiredPermission={{ module: "admin", action: "read" }}><AdminModule /></ProtectedRoute>,
         "role": <ProtectedRoute requiredPermission={{ module: "role", action: "read" }}><Role /></ProtectedRoute>,
         "project": <ProtectedRoute requiredPermission={{ module: "project", action: "read" }}><Project /></ProtectedRoute>,
         "project/overview/:id": <ProtectedRoute requiredPermission={{ module: "project", action: "read" }}><ProjectOverview /></ProtectedRoute>
@@ -162,7 +179,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <ErrorBoundary><Navigate to={`/${localStorage.getItem('userType')?.replace(/\s+/g, '-') || 'admin'}/dashboard`} replace /></ErrorBoundary>
+        element: <ErrorBoundary><Navigate to={`/${(localStorage.getItem('userType')?.replace(/\s+/g, '-') === 'superadmin' ? ama : (localStorage.getItem('userType')?.replace(/\s+/g, '-') || 'admin'))}/dashboard`} replace /></ErrorBoundary>
     },
     {
         path: "/:role",
@@ -191,6 +208,10 @@ const router = createBrowserRouter([
             {
                 path: "plan",
                 element: <ErrorBoundary><ProtectedRoute requiredPermission={{ module: "plan", action: "read" }}><PlanModule /></ProtectedRoute></ErrorBoundary>
+            },
+            {
+                path: "admin",
+                element: <ErrorBoundary><ProtectedRoute requiredPermission={{ module: "admin", action: "read" }}><AdminModule /></ProtectedRoute></ErrorBoundary>
             },
             {
                 path: "role",

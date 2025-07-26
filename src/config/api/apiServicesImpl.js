@@ -1,7 +1,7 @@
 import { createBaseApi } from './createBaseApi.js';
 
 const apiServiceNames = [
-    'user', 'role', 'lead', 'contact', 'pipeline', 'stage', 'filter', 'proposal', 'designation', 'employee', 'department', 'teamMember', 'note', 'project', 'activity', 'holiday', 'leave', 'task', 'milestone', 'milestoneTask', 'followup', 'maintenance', 'attendance', 'companyDetails', 'reminder', 'setting', 'inquiry', 'company', 'plan'
+    'user', 'role', 'lead', 'contact', 'pipeline', 'stage', 'filter', 'proposal', 'designation', 'employee', 'department', 'teamMember', 'note', 'project', 'activity', 'holiday', 'leave', 'task', 'milestone', 'milestoneTask', 'followup', 'maintenance', 'attendance', 'companyDetails', 'reminder', 'setting', 'inquiry', 'company', 'plan', 'admin'
 ];
 
 const apiServices = {};
@@ -72,6 +72,7 @@ const settingApi = apiServices.settingApi;
 const inquiryApi = apiServices.inquiryApi;
 const companyApi = apiServices.companyApi;
 const planApi = apiServices.planApi;
+const adminApi = apiServices.adminApi;
 
 export {
     apiServices,
@@ -104,5 +105,6 @@ export {
     settingApi,
     inquiryApi,
     companyApi,
-    planApi
+    planApi,
+    adminApi
 };

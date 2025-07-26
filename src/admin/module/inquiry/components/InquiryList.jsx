@@ -2,9 +2,9 @@ import React from 'react';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { message, Tooltip, Tag } from 'antd';
 import dayjs from 'dayjs';
-import CommonTable from '../../../../../components/CommonTable';
-import { generateColumns } from '../../../../../utils/tableUtils.jsx';
-import { inquiryApi } from '../../../../../config/api/apiServices';
+import CommonTable from '../../../../components/CommonTable';
+import { generateColumns } from '../../../../utils/tableUtils.jsx';
+import { inquiryApi } from '../../../../config/api/apiServices';
 import { RiBuildingLine } from 'react-icons/ri';
 
 const InquiryList = ({

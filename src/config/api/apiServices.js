@@ -29,11 +29,12 @@ import {
     settingApi,
     inquiryApi,
     companyApi,
-    planApi
+    planApi,
+    adminApi
 } from './apiServicesImpl.js';
 
 export const apiServiceNames = [
-    'user', 'role', 'lead', 'contact', 'pipeline', 'stage', 'filter', 'proposal','designation', 'employee', 'department', 'teamMember', 'note', 'project', 'activity', 'holiday', 'leave', 'task', 'milestone', 'milestoneTask', 'followup', 'maintenance', 'attendance', 'companyDetails', 'reminder', 'setting', 'inquiry', 'company', 'plan'
+    'user', 'role', 'lead', 'contact', 'pipeline', 'stage', 'filter', 'proposal','designation', 'employee', 'department', 'teamMember', 'note', 'project', 'activity', 'holiday', 'leave', 'task', 'milestone', 'milestoneTask', 'followup', 'maintenance', 'attendance', 'companyDetails', 'reminder', 'setting', 'inquiry', 'company', 'plan', 'admin'
 ];
 
 export {
@@ -65,7 +66,8 @@ export {
     settingApi,
     inquiryApi,
     companyApi,
-    planApi
+    planApi,
+    adminApi
 };
 
 export const {
@@ -107,7 +109,8 @@ export const {
     useGetInquiriesQuery, useGetInquiryQuery, useCreateInquiryMutation, useUpdateInquiryMutation, useDeleteInquiryMutation,
     useGetCompaniesQuery, useGetCompanyQuery, useCreateCompanyMutation, useUpdateCompanyMutation, useDeleteCompanyMutation,
     useGetPlansQuery, useGetPlanQuery, useCreatePlanMutation, useUpdatePlanMutation, useDeletePlanMutation,
-    useGetActivePlansQuery, useGetDefaultPlanQuery, useGetTrialPlanQuery
+    useGetActivePlansQuery, useGetDefaultPlanQuery, useGetTrialPlanQuery,
+    useGetAdminsQuery, useGetAdminQuery, useCreateAdminMutation, useUpdateAdminMutation, useDeleteAdminMutation
 } = apiHooks;
 
 export { apiServices, apiHooks };

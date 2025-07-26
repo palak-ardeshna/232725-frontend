@@ -46,7 +46,7 @@ const DashboardSidebar = ({ collapsed, isMobile, onBackClick }) => {
     const [settingsPopoverVisible, setSettingsPopoverVisible] = useState(false);
 
     // Check if user has dashboard access
-    const hasDashboardAccess = user?.userType !== 'superadmin' || user?.isDashboard !== false;
+    const hasDashboardAccess = user?.userType !== 'employee' || user?.isDashboard !== false;
 
     useEffect(() => {
         if (location.pathname === '/' || location.pathname === '/dashboard') {
@@ -68,8 +68,8 @@ const DashboardSidebar = ({ collapsed, isMobile, onBackClick }) => {
     };
 
     const getBasePath = () => {
-        const role = userRole?.toLowerCase() || 'superadmin';
-        return role === 'admin' ? '/admin' : '/superadmin';
+        const role = userRole?.toLowerCase() || 'employee';
+        return role === 'admin' ? '/admin' : '/employee';
     };
 
     // For users without dashboard access, we'll keep the same menu items but disable navigation

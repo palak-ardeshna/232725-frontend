@@ -23,9 +23,10 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [formError, setFormError] = useState(null);
 
+    // Change userTypes to superadmin and admin
     const userTypes = [
-        { id: 'admin', label: 'Admin' },
-        { id: 'employee', label: 'Employee' }
+        { id: 'superadmin', label: 'Super Admin' },
+        { id: 'admin', label: 'Admin' }
     ];
 
     useEffect(() => {
@@ -46,8 +47,8 @@ const Login = () => {
 
         if (token && userType) {
             const dashboardRoutes = {
-                admin: '/admin/dashboard',
-                employee: '/employee/dashboard'
+                superadmin: '/superadmin/dashboard',
+                admin: '/admin/dashboard'
             };
 
             // Use replace to avoid adding to history stack
@@ -65,8 +66,8 @@ const Login = () => {
         if (isLogin) {
             const userType = localStorage.getItem('userType');
             const dashboardRoutes = {
-                admin: '/admin/dashboard',
-                employee: '/employee/dashboard'
+                superadmin: '/superadmin/dashboard',
+                admin: '/admin/dashboard'
             };
 
             // Use replace to avoid adding to history stack
@@ -117,15 +118,15 @@ const Login = () => {
                 userType: formData.userType
             };
 
+            // Change login logic to use superadmin and admin
             switch (formData.userType) {
-                case 'admin':
-                    await adminLogin({
-                        email: formData.identifier,
-                        password: formData.password
-                    }).unwrap();
+                case 'superadmin':
+                    // For superadmin, use the generic login endpoint
+                    await login(credentials).unwrap();
                     break;
-                case 'employee':
-                    await employeeLogin({
+                case 'admin':
+                    // For admin, use the adminLogin endpoint
+                    await adminLogin({
                         email: formData.identifier,
                         password: formData.password
                     }).unwrap();
