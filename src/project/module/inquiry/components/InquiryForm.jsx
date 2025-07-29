@@ -9,19 +9,15 @@ const InquiryForm = ({ initialValues, isSubmitting, onSubmit, onCancel }) => {
     const prepareInitialValues = () => {
         if (!initialValues) {
             return {
-                name: '',
-                email: '',
-                phone: '',
-                subject: '',
-                message: '',
-                status: 'new',
-                source: 'website'
+                inquiryName: '',
+                inquiryEmail: '',
+                inquiryPhone: '',
+                inquiryCategory: '',
+                inquiryAddress: '',
+                description: ''
             };
         }
-
-        return {
-            ...initialValues
-        };
+        return { ...initialValues };
     };
 
     const handleFinish = (values) => {
@@ -43,118 +39,88 @@ const InquiryForm = ({ initialValues, isSubmitting, onSubmit, onCancel }) => {
             className="inquiry-form"
         >
             <Form.Item
-                name="name"
+                name="inquiryName"
                 label="Name"
-                rules={[
-                    { required: true, message: 'Please enter name' },
-                    { min: 3, message: 'Name must be at least 3 characters' },
-                    { max: 50, message: 'Name must be less than 50 characters' }
-                ]}
+                rules={[{ required: true, message: 'Please enter name' }]}
             >
                 <Input placeholder="Enter name" />
             </Form.Item>
 
             <Form.Item
-                name="email"
+                name="inquiryEmail"
                 label="Email"
-                rules={[
-                    { required: true, message: 'Please enter email' },
-                    { 
-                        pattern: emailPattern, 
-                        message: 'Please enter a valid email address (e.g., example@domain.com)' 
-                    }
-                ]}
+                rules={[{ type: 'email', message: 'Please enter a valid email' }]}
             >
                 <Input placeholder="Enter email" />
             </Form.Item>
 
             <Form.Item
-                name="phone"
+                name="inquiryPhone"
                 label="Phone"
-                rules={[
-                    { required: true, message: 'Please enter phone number' },
-                    { 
-                        pattern: phonePattern, 
-                        message: 'Please enter a valid 10-digit phone number (e.g., 98xxxxxxx or +91 98xxxxxxx)' 
-                    }
-                ]}
+                rules={[{ required: true, message: 'Please enter phone number' }]}
             >
                 <Input placeholder="Enter phone number" />
             </Form.Item>
 
             <Form.Item
-                name="subject"
-                label="Subject"
-                rules={[
-                    { required: true, message: 'Please enter subject' },
-                    { max: 100, message: 'Subject must be less than 100 characters' }
-                ]}
+                name="inquiryCategory"
+                label="Category"
             >
-                <Input placeholder="Enter subject" />
+                <Input placeholder="Enter category" />
             </Form.Item>
 
             <Form.Item
-                name="message"
-                label="Message"
-                rules={[
-                    { required: true, message: 'Please enter message' }
-                ]}
+                name="inquiryAddress"
+                label="Address"
             >
-                <TextArea rows={4} placeholder="Enter message" />
+                <Input placeholder="Enter address" />
             </Form.Item>
 
             <Form.Item
-                name="status"
-                label="Status"
-                rules={[{ required: true, message: 'Please select status' }]}
+                name="description"
+                label="Description"
             >
-                <Select placeholder="Select status">
-                    <Select.Option value="new">New</Select.Option>
-                    <Select.Option value="in_progress">In Progress</Select.Option>
-                    <Select.Option value="resolved">Resolved</Select.Option>
-                    <Select.Option value="closed">Closed</Select.Option>
-                </Select>
+                <TextArea rows={4} placeholder="Enter description" />
             </Form.Item>
 
-            <Form.Item
-                name="source"
-                label="Source"
-            >
-                <Select placeholder="Select source">
-                    <Select.Option value="website">Website</Select.Option>
-                    <Select.Option value="email">Email</Select.Option>
-                    <Select.Option value="phone">Phone</Select.Option>
-                    <Select.Option value="social">Social Media</Select.Option>
-                    <Select.Option value="other">Other</Select.Option>
-                </Select>
-            </Form.Item>
+            {initialValues && (
+                <>
+                    <Form.Item
+                        name="priority"
+                        label="Priority"
+                    >
+                        <Select placeholder="Select priority" allowClear>
+                            <Select.Option value="low">Low</Select.Option>
+                            <Select.Option value="medium">Medium</Select.Option>
+                            <Select.Option value="high">High</Select.Option>
+                        </Select>
+                    </Form.Item>
+
+                    <Form.Item
+                        name="status"
+                        label="Status"
+                        rules={[{ required: true, message: 'Please select status' }]}
+                    >
+                        <Select placeholder="Select status">
+                            <Select.Option value="open">Open</Select.Option>
+                            <Select.Option value="closed">Closed</Select.Option>
+                        </Select>
+                    </Form.Item>
+                </>
+            )}
 
             <div className="form-actions">
                 <Space size={16}>
-                    <div>
-                        <Button
-                            onClick={onCancel}
-                            className="btn btn-secondary"
-                            type="default"
-                            disabled={isSubmitting}
-                        >
-                            Cancel
-                        </Button>
-                    </div>
-                    <div>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            loading={isSubmitting}
-                            className="btn btn-primary"
-                        >
-                            {initialValues ? 'Update Inquiry' : 'Create Inquiry'}
-                        </Button>
-                    </div>
+                    <Button onClick={onCancel} className="btn btn-secondary" type="default" disabled={isSubmitting}>
+                        Cancel
+                    </Button>
+                    <Button type="primary" htmlType="submit" loading={isSubmitting} className="btn btn-primary">
+                        {initialValues ? 'Update Inquiry' : 'Create Inquiry'}
+                    </Button>
                 </Space>
             </div>
         </Form>
     );
 };
 
-export default InquiryForm; 
+export default InquiryForm;

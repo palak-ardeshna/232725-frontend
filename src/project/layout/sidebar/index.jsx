@@ -152,83 +152,83 @@ const DashboardSidebar = ({ collapsed, isMobile, onBackClick }) => {
     ];
 
     const hrmMenuItems = [
-    //     {
-    //         key: `${getBasePath()}/hrm/employee`,
-    //         icon: <RiUserLine />,
-    //         label: 'Employee',
-    //         onClick: () => {
-    //             setHrmPopoverVisible(false);
-    //             handleMenuItemClick(`${getBasePath()}/hrm/employee`);
-    //         },
-    //         permission: 'employee',
-    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-    //     },
-    //     {
-    //         key: `${getBasePath()}/hrm/designation`,
-    //         icon: <RiUserStarLine />,
-    //         label: 'Designation',
-    //         onClick: () => {
-    //             setHrmPopoverVisible(false);
-    //             handleMenuItemClick(`${getBasePath()}/hrm/designation`);
-    //         },
-    //         permission: 'designation',
-    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-    //     },
-    //     {
-    //         key: `${getBasePath()}/hrm/department`,
-    //         icon: <RiGroupLine />,
-    //         label: 'Department',
-    //         onClick: () => {
-    //             setHrmPopoverVisible(false);
-    //             handleMenuItemClick(`${getBasePath()}/hrm/department`);
-    //         },
-    //         permission: 'department',
-    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-    //     },
-    //     {
-    //         key: `${getBasePath()}/hrm/team-member`,
-    //         icon: <RiTeamFill />,
-    //         label: 'Team',
-    //         onClick: () => {
-    //             setHrmPopoverVisible(false);
-    //             handleMenuItemClick(`${getBasePath()}/hrm/team-member`);
-    //         },
-    //         permission: 'teamMember',
-    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-    //     },
-    //     {
-    //         key: `${getBasePath()}/hrm/leave`,
-    //         icon: <RiCalendarLine />,
-    //         label: 'Leave',
-    //         onClick: () => {
-    //             setHrmPopoverVisible(false);
-    //             handleMenuItemClick(`${getBasePath()}/hrm/leave`);
-    //         },
-    //         permission: 'leave',
-    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-    //     },
-    //     {
-    //         key: `${getBasePath()}/hrm/attendance`,
-    //         icon: <RiCalendarLine />,
-    //         label: 'Attendance',
-    //         onClick: () => {
-    //             setHrmPopoverVisible(false);
-    //             handleMenuItemClick(`${getBasePath()}/hrm/attendance`);
-    //         },
-    //         permission: 'attendance',
-    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-    //     },
-    //     {
-    //         key: `${getBasePath()}/hrm/holiday`,
-    //         icon: <RiCalendarLine />,
-    //         label: 'Holiday',
-    //         onClick: () => {
-    //             setHrmPopoverVisible(false);
-    //             handleMenuItemClick(`${getBasePath()}/hrm/holiday`);
-    //         },
-    //         permission: 'holiday',
-    //         className: !hasDashboardAccess ? 'disabled-menu-item' : ''
-    //     }
+        {
+            key: `${getBasePath()}/hrm/employee`,
+            icon: <RiUserLine />,
+            label: 'Employee',
+            onClick: () => {
+                setHrmPopoverVisible(false);
+                handleMenuItemClick(`${getBasePath()}/hrm/employee`);
+            },
+            permission: 'employee',
+            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        },
+        {
+            key: `${getBasePath()}/hrm/designation`,
+            icon: <RiUserStarLine />,
+            label: 'Designation',
+            onClick: () => {
+                setHrmPopoverVisible(false);
+                handleMenuItemClick(`${getBasePath()}/hrm/designation`);
+            },
+            permission: 'designation',
+            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        },
+        {
+            key: `${getBasePath()}/hrm/department`,
+            icon: <RiGroupLine />,
+            label: 'Department',
+            onClick: () => {
+                setHrmPopoverVisible(false);
+                handleMenuItemClick(`${getBasePath()}/hrm/department`);
+            },
+            permission: 'department',
+            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        },
+        {
+            key: `${getBasePath()}/hrm/team-member`,
+            icon: <RiTeamFill />,
+            label: 'Team',
+            onClick: () => {
+                setHrmPopoverVisible(false);
+                handleMenuItemClick(`${getBasePath()}/hrm/team-member`);
+            },
+            permission: 'teamMember',
+            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        },
+        {
+            key: `${getBasePath()}/hrm/leave`,
+            icon: <RiCalendarLine />,
+            label: 'Leave',
+            onClick: () => {
+                setHrmPopoverVisible(false);
+                handleMenuItemClick(`${getBasePath()}/hrm/leave`);
+            },
+            permission: 'leave',
+            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        },
+        {
+            key: `${getBasePath()}/hrm/attendance`,
+            icon: <RiCalendarLine />,
+            label: 'Attendance',
+            onClick: () => {
+                setHrmPopoverVisible(false);
+                handleMenuItemClick(`${getBasePath()}/hrm/attendance`);
+            },
+            permission: 'attendance',
+            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        },
+        {
+            key: `${getBasePath()}/hrm/holiday`,
+            icon: <RiCalendarLine />,
+            label: 'Holiday',
+            onClick: () => {
+                setHrmPopoverVisible(false);
+                handleMenuItemClick(`${getBasePath()}/hrm/holiday`);
+            },
+            permission: 'holiday',
+            className: !hasDashboardAccess ? 'disabled-menu-item' : ''
+        }
     ];
 
     // Settings menu items - sarkhu banv setting mate

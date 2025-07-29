@@ -16,13 +16,6 @@
             border-bottom: 1px solid var(--border-color);
             padding: 10px 15px;
             font-weight: 600;
-
-            &.action-column {
-                position: sticky !important;
-                right: 0;
-                z-index: 1;
-                background: var(--bg-primary) !important;
-            }
         }
 
         &-tbody>tr {
@@ -37,23 +30,12 @@
                 background: transparent;
                 padding: 10px 15px;
                 color: var(--text-primary);
-
-                &.action-column {
-                    position: sticky !important;
-                    right: 0;
-                    z-index: 1;
-                    background: var(--bg-primary) !important;
-                }
             }
 
             // Selected row styles
             &.ant-table-row-selected {
                 >td {
                     background: var(--primary-light) !important;
-
-                    &.action-column {
-                        background: var(--primary-light) !important;
-                    }
                 }
             }
         }
@@ -239,18 +221,4 @@
     display: flex;
     align-items: center;
     gap: 8px;
-}
-
-// Mobile styles
-@media screen and (max-width: 768px) {
-    .table-list {
-        .ant-table {
-
-            &-thead>tr>th.action-column,
-            &-tbody>tr>td.action-column {
-                position: sticky !important;
-                right: 0;
-            }
-        }
-    }
 }

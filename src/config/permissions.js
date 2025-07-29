@@ -4,7 +4,7 @@ export const moduleCategories = [
     { key: 'hrm', name: 'HRM' },
 ];
 
-export const publicModules = ['note', 'files', 'additionalCosts', 'activity', 'followup'];
+export const publicModules = ['note', 'files', 'additionalCosts', 'activity', 'followup', 'inquiry'];
 
 export const availableModules = [
     { key: 'contact', name: 'Contact', category: 'crm' },

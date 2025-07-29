@@ -214,7 +214,6 @@ const CommonTable = ({
                 title: 'Actions',
                 key: 'actions',
                 width: 80,
-                fixed: 'right',
                 className: 'action-column',
                 render: (_, record) => {
                     // Filter items based on shouldShow property

@@ -2,7 +2,18 @@ import React from 'react';
 import { publicModules } from '../config/permissions';
 
 export const hasPermission = (userType, permissions, module, action = 'read') => {
-    return true;
+    // Admin has all permissions
+    if (userType === 'admin' || userType === 'superadmin') {
+        return true;
+    }
+
+    // Public modules are accessible to all
+    if (publicModules.includes(module)) {
+        return true;
+    }
+
+    // Check if user has the specific permission
+    return permissions?.[module]?.[action] === true;
 };
 
 export const parsePermissions = (permissions) => {
@@ -42,4 +53,4 @@ export const filterByPermission = (items, userType, permissions) => {
 
 export const withPermission = (Component, module, action = 'read') => {
     return (props) => <Component {...props} />;
-}; 
+};
