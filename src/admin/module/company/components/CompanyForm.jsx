@@ -19,49 +19,39 @@ const CompanyForm = ({ initialValues, isSubmitting, onSubmit, onCancel, isConver
     const prepareInitialValues = () => {
         if (!initialValues) {
             return {
-                name: '',
-                email: '',
-                phone: '',
-                category: '',
+                companyName: '',
+                companyEmail: '',
+                companyPhone: '',
+                companyCategory: '',
                 address: {
                     street: '',
                     city: '',
                     state: '',
-                    country: '',
-                    zipcode: ''
+                    zipcode: '',
+                    country: ''
                 },
                 description: '',
                 status: 'active',
-                payment_status: 'unpaid'
+                payment_status: 'unpaid',
+                covertedAt: null
             };
         }
 
-        // Extract address or initialize with default values
-        let address = initialValues.address || {};
-        if (typeof address === 'string') {
-            try {
-                address = JSON.parse(address);
-            } catch (e) {
-                console.error('Error parsing address:', e);
-                address = {};
-            }
-        }
-
         return {
-            name: initialValues.name || '',
-            email: initialValues.email || '',
-            phone: initialValues.phone || '',
-            category: initialValues.category || '',
-            address: {
-                street: address.street || '',
-                city: address.city || '',
-                state: address.state || '',
-                country: address.country || '',
-                zipcode: address.zipcode || ''
+            companyName: initialValues.name || '',
+            companyEmail: initialValues.email || '',
+            companyPhone: initialValues.phone || '',
+            companyCategory: initialValues.category || '',
+            address: initialValues.address || {
+                street: '',
+                city: '',
+                state: '',
+                zipcode: '',
+                country: ''
             },
             description: initialValues.description || '',
-            payment_status: initialValues.payment_status || 'unpaid',
             status: initialValues.status || 'active',
+            payment_status: initialValues.payment_status || 'unpaid'
         };
     };
 
@@ -69,18 +59,15 @@ const CompanyForm = ({ initialValues, isSubmitting, onSubmit, onCancel, isConver
         try {
             // Create a regular object for submission
             const formData = {
-                name: values.name,
-                email: values.email || '',
-                phone: values.phone || '',
-                category: values.category || '',
+                companyName: values.companyName,
+                companyEmail: values.companyEmail || '',
+                companyPhone: values.companyPhone || '',
+                companyCategory: values.companyCategory || '',
+                address: values.address || {},
                 description: values.description || '',
-                // Set default values for payment_status and status when adding
                 payment_status: isEditing ? values.payment_status : 'unpaid',
-                status: isEditing ? values.status : 'active',
+                status: isEditing ? values.status : 'active'
             };
-            
-            // Ensure address is a proper object
-            formData.address = values.address || {};
             
             // If this is a conversion, pass the source inquiry ID
             if (isConversion && initialValues?.source_inquiry_id) {
@@ -108,12 +95,11 @@ const CompanyForm = ({ initialValues, isSubmitting, onSubmit, onCancel, isConver
             className="company-form"
         >
             <Form.Item
-                name="name"
+                name="companyName"
                 label="Company Name"
                 rules={[
                     { required: true, message: 'Please enter company name' },
-                    { min: 2, message: 'Name must be at least 2 characters' },
-                    { max: 100, message: 'Name must be less than 100 characters' }
+                    { min: 2, message: 'Name must be at least 2 characters' }
                 ]}
             >
                 <Input placeholder="Enter company name" />
@@ -122,9 +108,10 @@ const CompanyForm = ({ initialValues, isSubmitting, onSubmit, onCancel, isConver
             <Row gutter={16}>
                 <Col span={12}>
                     <Form.Item
-                        name="email"
+                        name="companyEmail"
                         label="Email"
                         rules={[
+                            { required: true, message: 'Please enter email' },
                             { type: 'email', message: 'Please enter a valid email address' }
                         ]}
                     >
@@ -133,8 +120,11 @@ const CompanyForm = ({ initialValues, isSubmitting, onSubmit, onCancel, isConver
                 </Col>
                 <Col span={12}>
                     <Form.Item
-                        name="phone"
+                        name="companyPhone"
                         label="Phone"
+                        rules={[
+                            { required: true, message: 'Please enter phone number' }
+                        ]}
                     >
                         <Input placeholder="Enter phone number" />
                     </Form.Item>
@@ -142,7 +132,7 @@ const CompanyForm = ({ initialValues, isSubmitting, onSubmit, onCancel, isConver
             </Row>
 
             <Form.Item
-                name="category"
+                name="companyCategory"
                 label="Category"
             >
                 <Input placeholder="Enter company category" />
@@ -153,10 +143,9 @@ const CompanyForm = ({ initialValues, isSubmitting, onSubmit, onCancel, isConver
                     <Col span={24}>
                         <Form.Item
                             name={['address', 'street']}
-                            label="Street"
                             noStyle
                         >
-                            <Input placeholder="Enter street address" style={{ marginBottom: 16 }} />
+                            <Input placeholder="Street address" style={{ marginBottom: 16 }} />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -164,7 +153,6 @@ const CompanyForm = ({ initialValues, isSubmitting, onSubmit, onCancel, isConver
                     <Col span={8}>
                         <Form.Item
                             name={['address', 'city']}
-                            label="City"
                             noStyle
                         >
                             <Input placeholder="City" />
@@ -173,7 +161,6 @@ const CompanyForm = ({ initialValues, isSubmitting, onSubmit, onCancel, isConver
                     <Col span={8}>
                         <Form.Item
                             name={['address', 'state']}
-                            label="State"
                             noStyle
                         >
                             <Input placeholder="State" />
@@ -182,7 +169,6 @@ const CompanyForm = ({ initialValues, isSubmitting, onSubmit, onCancel, isConver
                     <Col span={8}>
                         <Form.Item
                             name={['address', 'zipcode']}
-                            label="Zipcode"
                             noStyle
                         >
                             <Input placeholder="Zipcode" />
@@ -193,7 +179,6 @@ const CompanyForm = ({ initialValues, isSubmitting, onSubmit, onCancel, isConver
                     <Col span={24}>
                         <Form.Item
                             name={['address', 'country']}
-                            label="Country"
                             noStyle
                         >
                             <Input placeholder="Country" />

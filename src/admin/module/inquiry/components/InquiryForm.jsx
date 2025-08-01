@@ -9,13 +9,14 @@ const InquiryForm = ({ initialValues, isSubmitting, onSubmit, onCancel }) => {
     const prepareInitialValues = () => {
         if (!initialValues) {
             return {
-                name: '',
-                email: '',
-                phone: '',
-                subject: '',
-                message: '',
-                status: 'new',
-                source: 'website'
+                inquiryName: '',
+                inquiryEmail: '',
+                inquiryPhone: '',
+                inquiryCategory: '',
+                inquiryAddress: '',
+                description: '',
+                status: 'open',
+                priority: 'medium'
             };
         }
 
@@ -43,25 +44,23 @@ const InquiryForm = ({ initialValues, isSubmitting, onSubmit, onCancel }) => {
             className="inquiry-form"
         >
             <Form.Item
-                name="name"
+                name="inquiryName"
                 label="Name"
                 rules={[
                     { required: true, message: 'Please enter name' },
-                    { min: 3, message: 'Name must be at least 3 characters' },
-                    { max: 50, message: 'Name must be less than 50 characters' }
+                    { min: 3, message: 'Name must be at least 3 characters' }
                 ]}
             >
                 <Input placeholder="Enter name" />
             </Form.Item>
 
             <Form.Item
-                name="email"
+                name="inquiryEmail"
                 label="Email"
                 rules={[
-                    { required: true, message: 'Please enter email' },
                     { 
                         pattern: emailPattern, 
-                        message: 'Please enter a valid email address (e.g., example@domain.com)' 
+                        message: 'Please enter a valid email address' 
                     }
                 ]}
             >
@@ -69,13 +68,13 @@ const InquiryForm = ({ initialValues, isSubmitting, onSubmit, onCancel }) => {
             </Form.Item>
 
             <Form.Item
-                name="phone"
+                name="inquiryPhone"
                 label="Phone"
                 rules={[
                     { required: true, message: 'Please enter phone number' },
                     { 
                         pattern: phonePattern, 
-                        message: 'Please enter a valid 10-digit phone number (e.g., 98xxxxxxx or +91 98xxxxxxx)' 
+                        message: 'Please enter a valid phone number' 
                     }
                 ]}
             >
@@ -83,49 +82,44 @@ const InquiryForm = ({ initialValues, isSubmitting, onSubmit, onCancel }) => {
             </Form.Item>
 
             <Form.Item
-                name="subject"
-                label="Subject"
-                rules={[
-                    { required: true, message: 'Please enter subject' },
-                    { max: 100, message: 'Subject must be less than 100 characters' }
-                ]}
+                name="inquiryCategory"
+                label="Category"
             >
-                <Input placeholder="Enter subject" />
+                <Input placeholder="Enter category" />
             </Form.Item>
 
             <Form.Item
-                name="message"
-                label="Message"
-                rules={[
-                    { required: true, message: 'Please enter message' }
-                ]}
+                name="inquiryAddress"
+                label="Address"
             >
-                <TextArea rows={4} placeholder="Enter message" />
+                <TextArea rows={2} placeholder="Enter address" />
+            </Form.Item>
+
+            <Form.Item
+                name="description"
+                label="Description"
+            >
+                <TextArea rows={4} placeholder="Enter description" />
+            </Form.Item>
+
+            <Form.Item
+                name="priority"
+                label="Priority"
+            >
+                <Select placeholder="Select priority">
+                    <Select.Option value="low">Low</Select.Option>
+                    <Select.Option value="medium">Medium</Select.Option>
+                    <Select.Option value="high">High</Select.Option>
+                </Select>
             </Form.Item>
 
             <Form.Item
                 name="status"
                 label="Status"
-                rules={[{ required: true, message: 'Please select status' }]}
             >
                 <Select placeholder="Select status">
-                    <Select.Option value="new">New</Select.Option>
-                    <Select.Option value="in_progress">In Progress</Select.Option>
-                    <Select.Option value="resolved">Resolved</Select.Option>
+                    <Select.Option value="open">Open</Select.Option>
                     <Select.Option value="closed">Closed</Select.Option>
-                </Select>
-            </Form.Item>
-
-            <Form.Item
-                name="source"
-                label="Source"
-            >
-                <Select placeholder="Select source">
-                    <Select.Option value="website">Website</Select.Option>
-                    <Select.Option value="email">Email</Select.Option>
-                    <Select.Option value="phone">Phone</Select.Option>
-                    <Select.Option value="social">Social Media</Select.Option>
-                    <Select.Option value="other">Other</Select.Option>
                 </Select>
             </Form.Item>
 

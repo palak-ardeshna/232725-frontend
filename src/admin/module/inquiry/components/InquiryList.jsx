@@ -1,11 +1,12 @@
 import React from 'react';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { message, Tooltip, Tag } from 'antd';
+import { message, Tooltip, Tag, Modal, Button } from 'antd';
 import dayjs from 'dayjs';
 import CommonTable from '../../../../components/CommonTable';
 import { generateColumns } from '../../../../utils/tableUtils.jsx';
 import { inquiryApi } from '../../../../config/api/apiServices';
 import { RiBuildingLine } from 'react-icons/ri';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 const InquiryList = ({
     inquiries,
@@ -21,12 +22,39 @@ const InquiryList = ({
     onConvertToCompany
 }) => {
     const [updateInquiry] = inquiryApi.useUpdateMutation();
+    const { confirm } = Modal;
+
+    const handleConvertToCompany = (record) => {
+        confirm({
+            title: 'Convert to Company',
+            icon: <ExclamationCircleOutlined />,
+            content: 'Are you sure you want to convert this inquiry to a company? This action cannot be undone.',
+            okText: 'Yes',
+            okType: 'primary',
+            cancelText: 'No',
+            async onOk() {
+                try {
+                    await updateInquiry({
+                        id: record.id,
+                        isConverted: true
+                    }).unwrap();
+                    message.success('Successfully converted to company');
+                    refetchInquiries();
+                } catch (error) {
+                    message.error('Failed to convert to company');
+                }
+            }
+        });
+    };
 
     const getStatusTag = (status) => {
         let color = '';
         switch (status) {
-            case 'new':
+            case 'open':
                 color = 'blue';
+                break;
+            case 'closed':
+                color = 'red';
                 break;
             case 'in_progress':
                 color = 'orange';

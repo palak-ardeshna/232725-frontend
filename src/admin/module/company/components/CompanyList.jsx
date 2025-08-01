@@ -1,6 +1,6 @@
 import React from 'react';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { Tooltip, Tag } from 'antd';
+import { Tooltip, Tag, Switch, message } from 'antd';
 import dayjs from 'dayjs';
 import CommonTable from '../../../../components/CommonTable';
 import { generateColumns } from '../../../../utils/tableUtils.jsx';
@@ -20,82 +20,88 @@ const CompanyList = ({
 }) => {
     const [updateCompany] = companyApi.useUpdateMutation();
 
-    const getStatusTag = (status) => {
-        let color = '';
-        switch (status) {
-            case 'active':
-                color = 'green';
-                break;
-            case 'inactive':
-                color = 'gray';
-                break;
-            default:
-                color = 'default';
+    const handleStatusToggle = async (record) => {
+        try {
+            const newStatus = record.status === 'active' ? 'inactive' : 'active';
+            await updateCompany({
+                id: record.id,
+                data: { status: newStatus }
+            }).unwrap();
+            message.success('Status updated successfully');
+            refetchCompanies();
+        } catch (error) {
+            message.error('Failed to update status');
         }
-        return <Tag color={color}>{status}</Tag>;
+    };
+
+    const getStatusSwitch = (status, record) => {
+        return (
+            <Switch
+                checked={status === 'active'}
+                onChange={() => handleStatusToggle(record)}
+                checkedChildren="Active"
+                unCheckedChildren="Inactive"
+                size="small"
+            />
+        );
     };
 
     const getPaymentStatusTag = (status) => {
-        let color = '';
-        switch (status) {
-            case 'paid':
-                color = 'green';
-                break;
-            case 'unpaid':
-                color = 'red';
-                break;
-            case 'pending':
-                color = 'orange';
-                break;
-            default:
-                color = 'default';
-        }
-        return <Tag color={color}>{status}</Tag>;
+        if (!status) return null;
+        const textColors = {
+            paid: 'var(--text-success)',
+            unpaid: 'var(--text-error)',
+            pending: 'var(--text-warning)'
+        };
+        return <span style={{ 
+            color: textColors[status.toLowerCase()] || 'var(--text-secondary)',
+            textTransform: 'capitalize'
+        }}>{status}</span>;
     };
 
     const fields = [
         {
-            name: 'name',
+            name: 'companyName',
             title: 'Company Name',
             render: (text) => (
                 <div className="name-container">
                     <Tooltip title={text}>
                         <span className="name">
-                            {text.length > 30 ? `${text.substring(0, 30)}...` : text}
+                            {text?.length > 30 ? `${text.substring(0, 30)}...` : text}
                         </span>
                     </Tooltip>
                 </div>
             )
         },
         {
-            name: 'email',
+            name: 'companyEmail',
             title: 'Email',
             render: (text) => text || 'N/A'
         },
         {
-            name: 'phone',
+            name: 'companyPhone',
             title: 'Phone',
             render: (text) => text || 'N/A'
         },
         {
-            name: 'category',
+            name: 'companyCategory',
             title: 'Category',
             render: (text) => text || 'N/A'
         },
         {
-            name: 'payment_status',
+            name: 'paymentStatus',
             title: 'Payment',
             render: (status) => getPaymentStatusTag(status)
         },
         {
             name: 'status',
             title: 'Status',
-            render: (status) => getStatusTag(status)
+            render: (status, record) => getStatusSwitch(status, record)
         },
         {
-            name: 'createdAt',
-            title: 'Created',
-            render: (date) => dayjs(date).format('DD/MM/YYYY')
+            name: 'covertedAt',
+            title: 'Converted Date',
+            render: (date) => date ? dayjs(date).format('DD/MM/YYYY') : 'N/A'
         }
     ];
 
