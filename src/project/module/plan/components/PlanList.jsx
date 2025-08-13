@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditOutlined, DeleteOutlined, StarOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, StarOutlined, CrownFilled } from '@ant-design/icons';
 import { message, Tooltip, Tag } from 'antd';
 import dayjs from 'dayjs';
 import CommonTable from '../../../../components/CommonTable';
@@ -73,14 +73,24 @@ const PlanList = ({
             name: 'planName',
             title: 'Plan Name',
             render: (text, record) => (
-                <div className="name-container">
+                <div className="name-container" style={{ 
+                    display: 'flex', 
+                    alignItems: 'center',
+                    gap: '8px'
+                }}>
+                    {record.isDefault && (
+                        <Tooltip title="Default Plan">
+                            <CrownFilled style={{ 
+                                color: '#faad14', 
+                                fontSize: '18px'
+                            }} />
+                        </Tooltip>
+                    )}
                     <Tooltip title={text}>
-                        <span className="name">
+                        <span className="name" style={{ flex: 1 }}>
                             {text.length > 30 ? `${text.substring(0, 30)}...` : text}
                         </span>
                     </Tooltip>
-                    {record.isDefault && <Tag color="blue" style={{ marginLeft: 8 }}>Default</Tag>}
-                    {record.isTrial && <Tag color="purple" style={{ marginLeft: 8 }}>Trial</Tag>}
                 </div>
             )
         },
@@ -89,10 +99,9 @@ const PlanList = ({
             title: 'Price',
             render: (price, record) => (
                 <div className="price-container">
-                    <span className="price" style={{ fontWeight: 'bold', color: '#1890ff' }}>
+                    <span className="price" style={{ fontWeight: 'bold' }}>
                         {formatPrice(price)}
                     </span>
-                    
                 </div>
             )
         },
@@ -101,10 +110,7 @@ const PlanList = ({
             title: 'Duration',
             render: (duration, record) => (
                 <div className="duration-container">
-                    <span className="duration" style={{ 
-                        fontWeight: record.isLifetime ? 'bold' : 'normal',
-                        color: record.isLifetime ? '#52c41a' : 'inherit'
-                    }}>
+                    <span className="duration" style={{ fontWeight: 'bold' }}>
                         {record.isLifetime ? 'Lifetime' : formatDuration(duration, record.durationType)}
                     </span>
                 </div>
@@ -112,7 +118,7 @@ const PlanList = ({
         },
         {
             name: 'trialDays',
-            title: 'Trial Days',
+            title: 'Trial',
             render: (days) => (
                 <div className="trial-days-container">
                     {days > 0 ? (
@@ -124,9 +130,13 @@ const PlanList = ({
             )
         },
         {
-            name: 'createdAt',
-            title: 'Created',
-            render: (date) => dayjs(date).format('DD/MM/YYYY')
+            name: 'isActive',
+            title: 'Status',
+            render: (isActive) => (
+                <Tag color={isActive ? 'success' : 'error'}>
+                    {isActive ? 'Active' : 'Inactive'}
+                </Tag>
+            )
         }
     ];
 
