@@ -57,8 +57,10 @@ const CommonTable = ({
     useEffect(() => {
         if (!module) return;
 
-        // Only update state if the permission value has changed
-        const newPermissionValue = userType === 'admin' || permissions?.[module]?.['delete'] === true;
+        // Check if module is public or user has permission
+        const isPublic = publicModules.includes(module);
+        const newPermissionValue = userType === 'admin' || userType === 'superadmin' || isPublic || permissions?.[module]?.['delete'] === true;
+        
         if (hasDeletePermission !== newPermissionValue) {
             setHasDeletePermission(newPermissionValue);
 
@@ -282,8 +284,8 @@ const CommonTable = ({
         return publicModules.includes(module);
     }, [module]);
 
-    // Only show row selection if user has delete permission or if it's a public module
-    const rowSelectionConfig = (rowSelection && (hasDeletePermission || isPublicModule)) ? {
+    // Configure row selection based on rowSelection prop and permissions
+    const rowSelectionConfig = rowSelection ? {
         selectedRowKeys,
         onChange: handleSelectChange,
         selections: [
@@ -292,9 +294,11 @@ const CommonTable = ({
             Table.SELECTION_NONE
         ],
         getCheckboxProps: (record) => ({
-            disabled: typeof rowSelection === 'function'
-                ? !rowSelection(record)
-                : record.created_by === 'SYSTEM',
+            disabled: typeof rowSelection === 'object' && rowSelection.permission
+                ? !hasPermission(userType, permissions, rowSelection.module || module, rowSelection.permission)
+                : typeof rowSelection === 'function'
+                    ? !rowSelection(record)
+                    : record.created_by === 'SYSTEM',
             name: record.name,
         }),
     } : undefined;
